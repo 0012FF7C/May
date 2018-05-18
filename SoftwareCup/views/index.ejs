@@ -104,22 +104,7 @@
 
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/main.js"></script>
-<script type="text/javascript">
-    $(".cd-search-trigger").click(function () {
-        var val=$("#textedit").val();
-        var selOp=$("#select-category").val();
-        $.ajax({
-            type: "post",
-            url: "/",
-            data: {val:val,opt:selOp},
-            dataType: "json",
-            success: function(data){
-                $(".content-center").hide();
-            }
-        });
-
-
-    })
+<script type="text/javascript"
 
 </script>
 </body>

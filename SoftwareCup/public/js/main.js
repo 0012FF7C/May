@@ -1,5 +1,6 @@
 jQuery(document).ready(function($){
 	var resizing = false,
+        isSpread=false,
 		navigationWrapper = $('.cd-main-nav-wrapper'),
 		navigation = navigationWrapper.children('.cd-main-nav'),
 		searchForm = $('.cd-main-search'),
@@ -69,7 +70,20 @@ jQuery(document).ready(function($){
 			});
 		}
 	});
-
+    searchForm.submit(function () {
+        var val = $("#textedit").val();
+        var selOp = $("#select-category").val();
+        $.ajax({
+            type: "post",
+            url: "/",
+            data: {val: val, opt: selOp},
+            dataType: "json",
+            success: function (data) {
+                $(".content-center").hide();
+            }
+        });
+        closeSearchForm();
+    })
 	//close search form
 	searchForm.on('click', '.close', function(){
 		closeSearchForm();
