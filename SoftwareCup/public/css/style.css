@@ -586,7 +586,9 @@ Search Form
   }
   .cd-search-suggestions .news {
     float: left;
-    width: calc(100% - 140px);
+    height: 200px;
+    overflow-y:scroll;
+    width: calc(100%);
   }
   .cd-search-suggestions h3 {
     margin-bottom: 1.5em;
