@@ -35,7 +35,7 @@
     <div class="content-center">
         <!-- <h1>Advanced Search Form</h1> -->
         <header class="htmleaf-header">
-            <h1>jQuery和CSS3炫酷高级搜索框设计效果 <span>A search form with advanced filtering options and quick link suggestions</span></h1>
+            <h1>0012FF7C的作品 <span>大连理工大学软件学院</span></h1>
             <div class="htmleaf-links">
                 <a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
                 <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Form/201602053113.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
@@ -46,7 +46,7 @@
 
 <div id="search" class="cd-main-search">
     <form>
-        <input type="search" placeholder="Search...">
+        <input id="textedit" type="search" placeholder="Search...">
 
         <div class="cd-select">
             <span>in</span>
@@ -103,5 +103,21 @@
 
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/main.js"></script>
+<script type="text/javascript">
+    $(".cd-search-trigger").click(function () {
+        var val=$("#textedit").val();
+        $.ajax({
+            type: "post",
+            url: "/",
+            data: {val:val},
+            dataType: "json",
+            success: function(data){
+                alert("sss");
+            }
+        });
+
+    })
+
+</script>
 </body>
 </html>
