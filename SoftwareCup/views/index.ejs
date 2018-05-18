@@ -193,15 +193,24 @@
                     for (var i=0;i<data.length;i++){
                         var data1 = data[i].CORP_NAME;
                         var html='';
-                            html += '<li>';
+                            html += '<li'+' id="'+data[i].ID +'">';
                             html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
                             html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
-                            html += '<time datetime="2016-01-12">'+'Jan 28, 2016'+'</time>';
+                            html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
                         html +='</li>';
                         $("#AssociativeSearch").append(html);
                     }
                     //alert(htm);
                     //closeSearchForm();
+
+                    $("#AssociativeSearch").find("li").click(function () {
+                        for(var i=0;i<data.length;i++){
+                            if(data[i].ID ===$(this).attr('id')){
+                                break;
+                            }
+
+                        }
+                    })
                 }
             });
         });
@@ -222,6 +231,10 @@
         searchForm.on('change', 'select', function(){
             searchForm.find('.selected-value').text($(this).children('option:selected').text());
         });
+
+
+
+
     });
 
 </script>
