@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-
-//var DBTCorp = require("../db/DBTCorp");
+var DBTCorp = require("../db/DBTCorp");
 router.get('/', function(req, res, next) {
     var val = req.body.val;
     console.log("val :"+val);
@@ -12,8 +10,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var val = req.body.val;
-    console.log("val :"+val);
-    res.send({ title: 'Express' });
+    var option = req.body.val;
+    console.log("val :"+ val);
+    var sql = "select from t_corp where corp_name ="+val;
+    var data = DBTCorp.queryDB(sql);
+    console.log("data :"+ JSON.stringify(data));
+    res.send({ data: data });
 });
 
 router.get('/chat', function(req, res, next) {
