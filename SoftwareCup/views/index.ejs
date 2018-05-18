@@ -35,10 +35,10 @@
     <div class="content-center">
         <!-- <h1>Advanced Search Form</h1> -->
         <header class="htmleaf-header">
-            <h1>0012FF7C的作品 <span>大连理工大学软件学院</span></h1>
+            <h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>
             <div class="htmleaf-links">
-                <a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
-                <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Form/201602053113.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+                <a class="htmleaf-icon icon-htmleaf-home-outline" href="/"  ><span> jQuery之家</span></a>
+                <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)" ><span> 返回下载页</span></a>
             </div>
         </header>
     </div>
@@ -50,11 +50,12 @@
 
         <div class="cd-select">
             <span>in</span>
-            <select name="select-category">
-                <option value="all-categories">all Categories</option>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-                <option value="category3">Category 3</option>
+            <select id="select-category">
+                <option value="TorpBaseInfo" >企业基本信息</option>
+                <option value="OwnershipStructure">股权结构</option>
+                <option value="InvestmentGenealogy">投资族谱</option>
+                <option value="EnterpriseAtlas">企业图谱</option>
+                <option value="DoubtfulRelationship">疑似关系</option>
             </select>
             <span class="selected-value">all Categories</span>
         </div>
@@ -106,15 +107,17 @@
 <script type="text/javascript">
     $(".cd-search-trigger").click(function () {
         var val=$("#textedit").val();
+        var selOp=$("#select-category").val();
         $.ajax({
             type: "post",
             url: "/",
-            data: {val:val},
+            data: {val:val,opt:selOp},
             dataType: "json",
             success: function(data){
-                alert("sss");
+                $(".content-center").hide();
             }
         });
+
 
     })
 
