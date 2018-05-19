@@ -10,16 +10,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var val = req.body.val;
-    var opt = req.body.opt;
+    var option = req.body.val;
     console.log("val :"+ val);
-    console.log("opt :"+ opt);
-    var sql = "select * from t_corp where CORP_NAME like '%" + val+"%'";
-    console.log("sql :" + sql);
-    DBTCorp.queryDB(sql,function (data) {
-        console.log("data :"+ JSON.stringify(data));
-        res.send({ data: data });
-    });
-
+    var sql = "select from t_corp where corp_name ="+val;
+    var data = DBTCorp.queryDB(sql);
+    console.log("data :"+ JSON.stringify(data));
+    res.send({ data: data });
 });
 
 router.get('/chat', function(req, res, next) {
