@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>0012FF7C企业族谱分析作品</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
     <link rel="stylesheet" href="css/style.css">
@@ -30,34 +33,103 @@
     <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
 </header>
 
-<main class="cd-main-content" id="welcome">
-    <!-- your content here -->
-    <div class="content-center">
-        <!-- <h1>Advanced Search Form</h1> -->
-        <header class="htmleaf-header">
-            <h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>
-            <div class="htmleaf-links">
-                <a class="htmleaf-icon icon-htmleaf-home-outline" href="/"  ><span> jQuery之家</span></a>
-                <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)" ><span> 返回下载页</span></a>
-            </div>
+<!--<main class="cd-main-content" >-->
+    <!--&lt;!&ndash; your content here &ndash;&gt;-->
+    <!--<div class="content-center">-->
+        <!--&lt;!&ndash; <h1>Advanced Search Form</h1> &ndash;&gt;-->
+        <!--<header class="htmleaf-header">-->
+            <!--<h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>-->
+            <!--<div class="htmleaf-links">-->
+                <!--<a class="htmleaf-icon icon-htmleaf-home-outline" href="/"  ><span> jQuery之家</span></a>-->
+                <!--<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)" ><span> 返回下载页</span></a>-->
+            <!--</div>-->
 
-        </header>
+        <!--</header>-->
+    <!--</div>-->
+<!--</main>-->
+<style>
+    .ComInfo{
+        height:1000px;
+        width:800px;
+        background-color: white;
+        padding: 25px;
+        margin-top:25px;
+        box-shadow: 5px 5px 5px 5px rgba(0,00,0,0.5);
+    }
+    .ComLogo{
+        box-shadow: 1px 1px 1px 1px rgba(0,00,0,0.5);
+        height:280px;
+        width:210px;
+        float:left;
+    }
+    .BaseInfo{
+        height:200px;
+        width:515px;
+        margin-left:25px;
+        float: left;
+        display: inline;
+    }
+    #ComName{
+        height:100px;
+        margin-top:10px;
+    }
+    .FontSize-big{
+        font-size: 50px;
+    }
+    .FontSize-middle{
+        font-size: 20px;
+    }
+
+    .DetailInfo{
+        width:750px;
+        height:725px;
+        float: left;
+        margin-top:25px;
+    }
+    #PhoneNum{
+        margin-top:20px;
+        width:300px;
+        line-height: 35px;
+    }
+    #OfficialWeb{
+        line-height: 35px;
+        width:300px;
+    }
+    #MailAdd
+    {
+        line-height: 35px;
+        width:400px;
+    }
+    #NearCom{
+        line-height: 35px;
+        margin-left:25px;
+        color: cadetblue;
+    }
+    #ComAddr
+    {
+        line-height: 35px;
+    }
+
+</style>
+<main class=" cd-main-content" >
+    <div class="center-block">
+        <div class="ComInfo center-block">
+            <img class="ComLogo" src="img/placeholder.png"></img>
+            <div class="BaseInfo">
+                <div class="text-center FontSize-big" id="ComName" style="display: table;">
+                    <div style="display:table-cell;vertical-align:middle;">大连某某商家有限公司</div>
+                </div>
+                <div class="FontSize-middle" id="PhoneNum">电话 : 18742588291</div>
+                <div class="FontSize-middle" id="OfficialWeb">官网 : www.codingjiang.com.cn</div>
+                <div class="FontSize-middle" id="MailAdd">邮箱 : coding_jiang@outlook.com</div>
+                <div class="FontSize-middle" style="float: left;" id="ComAddr">地址 : 大连理工大学</div>
+                <div class="FontSize-middle" id="NearCom"style="float: left;"  onclick="console.log('待完善');" >附近公司</div>
+            </div>
+            <div class="DetailInfo"></div>
+        </div>
     </div>
 </main>
-<main class="cd-main-content" id="BaseInfo">
-    <!-- your content here -->
-    <div class="content-center">
-        <!-- <h1>Advanced Search Form</h1> -->
-        <header class="htmleaf-header">
-            <h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>
-            <div class="htmleaf-links">
-                <a class="htmleaf-icon icon-htmleaf-home-outline" href="/"  ><span> jQuery之家</span></a>
-                <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)" ><span> 返回下载页</span></a>
-            </div>
 
-        </header>
-    </div>
-</main>
 
 <div id="search" class="cd-main-search">
     <form>
