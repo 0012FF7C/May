@@ -576,7 +576,7 @@ Search Form
     content: "";
     display: table;
   }
-  .cd-search-suggestions .quick-links, .cd-search-suggestions .news {
+  .cd-search-suggestions .quick-links, .cd-search-suggestions .responses {
     display: inline-block;
   }
   .cd-search-suggestions .quick-links {
@@ -584,11 +584,32 @@ Search Form
     width: 140px;
     text-align: right;
   }
-  .cd-search-suggestions .news {
+  .cd-search-suggestions .responses {
     float: left;
     height: 200px;
-    overflow-y:scroll;
+    overflow-y:auto;
     width: calc(100%);
+  }
+  .scrollbar{
+     width: 30px;
+     height: 0px;
+     margin: 0 auto;
+    float:left;
+
+   }
+  .responses::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+  }
+  .responses::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
+  }
+  .responses::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
   }
   .cd-search-suggestions h3 {
     margin-bottom: 1.5em;
@@ -621,12 +642,12 @@ Search Form
     font-size: 1.2rem;
     color: #70727d;
   }
-  .cd-search-suggestions .news li {
+  .cd-search-suggestions .responses li {
     position: relative;
     padding: 0.625em 0.75em 0.75em 4em;
     margin-bottom: 0.25em;
   }
-  .cd-search-suggestions .news li:last-of-type {
+  .cd-search-suggestions .responses li:last-of-type {
     margin-bottom: 0;
   }
   .cd-search-suggestions .image-wrapper {

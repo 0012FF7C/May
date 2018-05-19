@@ -493,7 +493,7 @@ Search Form
 		box-shadow: 0 4px 40px rgba(#000, .39);
 		@include clearfix;
 
-		.quick-links, .news {
+		.quick-links, .responses {
 			display: inline-block;
 		}
 
@@ -503,7 +503,7 @@ Search Form
 			text-align: right;
 		}
 
-		.news {
+		.responses {
 			float: left;
 			width: calc(100% - 140px);
 		}
@@ -545,7 +545,7 @@ Search Form
 			color: tint($color-1, 30%);
 		}
 
-		.news li {
+		.responses li {
 			position: relative;
 			padding: 0.625em 0.75em 0.75em 4em; 
 			margin-bottom: 0.25em;
