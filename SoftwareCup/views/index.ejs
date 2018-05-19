@@ -30,7 +30,21 @@
     <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
 </header>
 
-<main class="cd-main-content">
+<main class="cd-main-content" id="welcome">
+    <!-- your content here -->
+    <div class="content-center">
+        <!-- <h1>Advanced Search Form</h1> -->
+        <header class="htmleaf-header">
+            <h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>
+            <div class="htmleaf-links">
+                <a class="htmleaf-icon icon-htmleaf-home-outline" href="/"  ><span> jQuery之家</span></a>
+                <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)" ><span> 返回下载页</span></a>
+            </div>
+
+        </header>
+    </div>
+</main>
+<main class="cd-main-content" id="BaseInfo">
     <!-- your content here -->
     <div class="content-center">
         <!-- <h1>Advanced Search Form</h1> -->
@@ -47,7 +61,7 @@
 
 <div id="search" class="cd-main-search">
     <form>
-        <input class="cd-textedit" autocomplete="off" type="search" placeholder="Search...">
+        <input class="cd-textedit" oninput="subfunc()" autocomplete="off" type="search" placeholder="Search...">
 
         <div class="cd-select">
             <span>in</span>

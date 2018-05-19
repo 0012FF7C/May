@@ -1,15 +1,53 @@
+var resizing = false,
+    navigationWrapper = $('.cd-main-nav-wrapper'),
+    navigation = navigationWrapper.children('.cd-main-nav'),
+    searchForm = $('.cd-main-search'),
+    searchSuggest=$('.cd-search-suggestions'),
+    pageContent = $('.cd-main-content'),
+    searchTrigger = $('.cd-search-trigger'),
+    coverLayer = $('.cd-cover-layer'),
+    navigationTrigger = $('.cd-nav-trigger'),
+    mainHeader = $('.cd-main-header');
+function subfunc() {
+    searchSuggest.show();
+    var val = $(".cd-textedit").val();
+    var selOp = $("#select-category").val();
+    $.ajax({
+        type: "post",
+        url: "/",
+        data: {val: val, opt: selOp},
+        dataType: "json",
+        success: function (data) {
+            var htm = "";
+            $("#AssociativeSearch").html("");
+            data=data.data;
+            //alert(JSON.stringify(data));
+            for (var i=0;i<data.length;i++){
+                var data1 = data[i].CORP_NAME;
+                var html='';
+                html += '<li'+' id="'+data[i].ID +'">';
+                html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
+                html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
+                html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
+                html +='</li>';
+                $("#AssociativeSearch").append(html);
+            }
+            //alert(htm);
+            //closeSearchForm();
 
+            $("#AssociativeSearch").find("li").click(function () {
+                for(var i=0;i<data.length;i++){
+                    if(data[i].ID ===$(this).attr('id')){
+                        break;
+                    }
+
+                }
+            })
+        }
+    });
+}
 jQuery(document).ready(function($){
-    var resizing = false,
-        navigationWrapper = $('.cd-main-nav-wrapper'),
-        navigation = navigationWrapper.children('.cd-main-nav'),
-        searchForm = $('.cd-main-search'),
-        searchSuggest=$('.cd-search-suggestions'),
-        pageContent = $('.cd-main-content'),
-        searchTrigger = $('.cd-search-trigger'),
-        coverLayer = $('.cd-cover-layer'),
-        navigationTrigger = $('.cd-nav-trigger'),
-        mainHeader = $('.cd-main-header');
+
 
     function checkWindowWidth() {
         var mq = window.getComputedStyle(mainHeader.get(0), '::before').getPropertyValue('content').replace(/"/g, '').replace(/'/g, "");
@@ -64,7 +102,6 @@ jQuery(document).ready(function($){
     searchTrigger.on('click', function(event){
         event.preventDefault();
         if( searchTrigger.hasClass('search-form-visible') ) {
-            searchSuggest.show();
             searchForm.find('form').submit();
         } else {
             searchTrigger.addClass('search-form-visible');
@@ -74,43 +111,8 @@ jQuery(document).ready(function($){
             searchSuggest.hide();
         }
     });
-    searchForm.submit(function () {
-        var val = $(".cd-textedit").val();
-        var selOp = $("#select-category").val();
-        $.ajax({
-            type: "post",
-            url: "/",
-            data: {val: val, opt: selOp},
-            dataType: "json",
-            success: function (data) {
-                var htm = "";
-                $("#AssociativeSearch").html("");
-                data=data.data;
-                //alert(JSON.stringify(data));
-                for (var i=0;i<data.length;i++){
-                    var data1 = data[i].CORP_NAME;
-                    var html='';
-                    html += '<li'+' id="'+data[i].ID +'">';
-                    html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
-                    html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
-                    html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
-                    html +='</li>';
-                    $("#AssociativeSearch").append(html);
-                }
-                //alert(htm);
-                //closeSearchForm();
 
-                $("#AssociativeSearch").find("li").click(function () {
-                    for(var i=0;i<data.length;i++){
-                        if(data[i].ID ===$(this).attr('id')){
-                            break;
-                        }
-
-                    }
-                })
-            }
-        });
-    });
+    searchForm.submit(subfunc);
     //close search form
     searchForm.on('click', '.close', function(){
         closeSearchForm();
@@ -122,14 +124,12 @@ jQuery(document).ready(function($){
 
     $(document).keyup(function(event){
         if( event.which=='27' ) closeSearchForm();
+        if( event.which=='13' ) searchForm.find('form').submit();
     });
 
     //upadate span.selected-value text when user selects a new option
     searchForm.on('change', 'select', function(){
         searchForm.find('.selected-value').text($(this).children('option:selected').text());
     });
-
-
-
-
+    // noinspection JSAnnotator
 });
