@@ -22,7 +22,11 @@ function subfunc() {
         success: function (data) {
             var htm = "";
             $("#AssociativeSearch").html("");
+
             data=data.data;
+
+            if(data.length==0)
+                $("#AssociativeSearch").html("暂无结果");
             //alert(JSON.stringify(data));
             for (var i=0;i<data.length;i++){
                 var data1 = data[i].CORP_NAME;
