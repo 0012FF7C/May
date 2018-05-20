@@ -49,7 +49,7 @@
 <!--</main>-->
 <style>
     .ComInfo{
-        height:1000px;
+        height:1250px;
         width:800px;
         background-color: white;
         padding: 25px;
@@ -70,8 +70,10 @@
         display: inline;
     }
     #ComName{
-        height:100px;
-        margin-top:10px;
+        width: 505px;
+        background-color: cornsilk;
+        height:120px;
+        margin-top:0px;
     }
     .FontSize-big{
         font-size: 50px;
@@ -82,32 +84,113 @@
 
     .DetailInfo{
         width:750px;
-        height:725px;
+        height:800px;
         float: left;
         margin-top:25px;
     }
     #PhoneNum{
-        margin-top:20px;
-        width:300px;
-        line-height: 35px;
+        margin-left: 10px;
+        line-height: 33px;
+        width:480px;
+        line-height: 33px;
     }
     #OfficialWeb{
-        line-height: 35px;
-        width:300px;
+        margin-left: 10px;
+        line-height: 33px;
+        width:480px;
+        background-color: #f0efee;
     }
     #MailAdd
     {
-        line-height: 35px;
-        width:400px;
+        margin-left: 10px;
+        line-height: 33px;
+        width:480px;
     }
     #NearCom{
-        line-height: 35px;
-        margin-left:25px;
+
+        margin-left: 10px;
+        line-height: 33px;
+        width:480px;
         color: cadetblue;
+        cursor: pointer;
     }
     #ComAddr
     {
-        line-height: 35px;
+        margin-left: 10px;
+        line-height: 33px;
+        width:480px;
+        background-color: #f0efee;
+    }
+    .Detail-Left{
+        float:left;
+        height:598px;
+        width:375px;
+    }
+    .Detail-Right{
+        float:left;
+        height:598px;
+        width:375px;
+    }
+    .JiHang{
+        width: 376px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        border:1px solid black;
+        background-color: lightblue;
+    }
+    .OuHang{
+        width: 376px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        border:1px solid black;
+        background-color: white;
+    }
+    .Detail-Title{
+        width: 100px;
+        height: 60px;
+        border-right:1px solid black;
+        float: left;
+    }
+    .Detail-Content{
+        width: 260px;
+        height: 60px;
+        float: left;
+        line-height: 30px;
+        overflow: hidden;
+        display: table;
+    }
+    .FontSize-Small{
+        font-size: 15px;
+    }
+    .FareScope
+    {
+        width:751px;
+        height:300px;
+        float: left;
+        border:1px solid black;
+    }
+    .ScopeTitle
+    {
+        width: 100px;
+        height: 299px;
+        line-height: 299px;
+        border:1px solid black;
+        text-align: center;
+        float: left;
+        background-color: lightblue;
+    }
+    .FareScopeContent{
+        height: 299px;
+        width: 750px;
+        line-height: 50px;
+    }
+    #FARE_SCOPE{
+        height: 299px;
+        width: 650px;
+        line-height: 50px;
+        padding: 20px;
     }
 
 </style>
@@ -117,15 +200,147 @@
             <img class="ComLogo" src="img/placeholder.png"></img>
             <div class="BaseInfo">
                 <div class="text-center FontSize-big" id="ComName" style="display: table;">
-                    <div style="display:table-cell;vertical-align:middle;">大连某某商家有限公司</div>
+                    <div id="CORP_NAME" style="text-align:center;display:table-cell;vertical-align:middle;">大连某家有限公司</div>
                 </div>
-                <div class="FontSize-middle" id="PhoneNum">电话 : 18742588291</div>
-                <div class="FontSize-middle" id="OfficialWeb">官网 : www.codingjiang.com.cn</div>
-                <div class="FontSize-middle" id="MailAdd">邮箱 : coding_jiang@outlook.com</div>
-                <div class="FontSize-middle" style="float: left;" id="ComAddr">地址 : 大连理工大学</div>
+                <div class="FontSize-middle" id="PhoneNum">电话 :<div id="TEL" style="float: right"> 18742588291</div></div>
+                <div class="FontSize-middle" id="OfficialWeb">官网 :<div id="WEB_URL" style="float: right"> www.coding_jiang.com.cn</div></div>
+                <div class="FontSize-middle" id="MailAdd">邮箱 : <div id="EMAIL" style="float: right">coding_jiang@outlook.com</div></div>
+                    <div class="FontSize-middle" style="float: left;" id="ComAddr">地址 : <div id="TEL" style="float: right">大连理工大学</div></div>
                 <div class="FontSize-middle" id="NearCom"style="float: left;"  onclick="console.log('待完善');" >附近公司</div>
             </div>
-            <div class="DetailInfo"></div>
+            <div class="DetailInfo">
+                <div class="Detail-Left">
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >登记机关</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="BELONG_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >所属地区</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="BELONG_DIST_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >所属行业</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="BELONG_TRADE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >公司类型</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="ECON_KIND" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >企业大类</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="ADMIT_MAIN" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >成立日期</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="START_DATE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >核准日期</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="CHECK_DATE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >法人证件</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="OPER_MAN_IDENT_NO" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >法人姓名</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="OPER_MAN_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >经营状态</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="CORP_STATUS" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Detail-Right">
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >注册资金</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="REG_CAPI" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >经营期限</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="FARE_TERM_START" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >注册号</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="UNI_SCID" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >从业人数</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="PRAC_PERSON_NUM" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >组织机构</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="ORG_INST_CODE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >纳税人</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="TAXPAY_NUM" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >人员规模</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="STAFF_SIZE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >创建机构</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="CREATE_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >曾用名</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="FORMER_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >英文名</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="ENGLISH_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="FareScope">
+                    <div class="FontSize-middle ScopeTitle">经营范围</div>
+                    <div class="FareScopeContent FontSize-Small">
+                        <div id="FARE_SCOPE" style="display:table-cell;vertical-align:middle; overflow: hidden;">计算机软件开发、销售及相关产品培训，计算机应用服务，线路、管道、设备安装，电子产品及通信设备技术服务，电子仪器的生产与销售，电子计算机及配件、五金、交电、百货、化工原料及产品、汽车、建筑材料销售，商品信息咨询。（依法须经批准的项目，经相关部门批准后方可开展经营活动）</div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </main>

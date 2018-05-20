@@ -7,7 +7,9 @@ var resizing = false,
     searchTrigger = $('.cd-search-trigger'),
     coverLayer = $('.cd-cover-layer'),
     navigationTrigger = $('.cd-nav-trigger'),
-    mainHeader = $('.cd-main-header');
+    mainHeader = $('.cd-main-header'),
+    mainContent=$('.cd-main-content');
+
 function subfunc() {
     searchSuggest.show();
     var val = $(".cd-textedit").val();
