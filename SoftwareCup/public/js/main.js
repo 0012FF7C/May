@@ -1,58 +1,131 @@
-var resizing = false,
-    navigationWrapper = $('.cd-main-nav-wrapper'),
-    navigation = navigationWrapper.children('.cd-main-nav'),
-    searchForm = $('.cd-main-search'),
-    searchSuggest=$('.cd-search-suggestions'),
-    pageContent = $('.cd-main-content'),
-    searchTrigger = $('.cd-search-trigger'),
-    coverLayer = $('.cd-cover-layer'),
-    navigationTrigger = $('.cd-nav-trigger'),
-    mainHeader = $('.cd-main-header'),
-    mainContent=$('.cd-main-content');
 
-function subfunc() {
-    searchSuggest.show();
-    var val = $(".cd-textedit").val();
-    var selOp = $("#select-category").val();
-    $.ajax({
-        type: "post",
-        url: "/",
-        data: {val: val, opt: selOp},
-        dataType: "json",
-        success: function (data) {
-            var htm = "";
-            $("#AssociativeSearch").html("");
 
-            data=data.data;
 
-            if(data.length==0)
-                $("#AssociativeSearch").html("暂无结果");
-            //alert(JSON.stringify(data));
-            for (var i=0;i<data.length;i++){
-                var data1 = data[i].CORP_NAME;
-                var html='';
-                html += '<li'+' id="'+data[i].ID +'">';
-                html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
-                html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
-                html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
-                html +='</li>';
-                $("#AssociativeSearch").append(html);
-            }
-            //alert(htm);
-            //closeSearchForm();
+    var resizing = false,
+        navigationWrapper = $('.cd-main-nav-wrapper'),
+        navigation = navigationWrapper.children('.cd-main-nav'),
+        searchForm = $('.cd-main-search'),
+        searchSuggest=$('.cd-search-suggestions'),
+        pageContent = $('.cd-main-content'),
+        searchTrigger = $('.cd-search-trigger'),
+        coverLayer = $('.cd-cover-layer'),
+        navigationTrigger = $('.cd-nav-trigger'),
+        mainHeader = $('.cd-main-header'),
+        mainContent=$('.cd-main-content');
 
-            $("#AssociativeSearch").find("li").click(function () {
-                for(var i=0;i<data.length;i++){
-                    if(data[i].ID ===$(this).attr('id')){
-                        break;
-                    }
+    function subfunc() {
+        searchSuggest.show();
+        var val = $(".cd-textedit").val();
+        var selOp = $("#select-category").val();
+        $.ajax({
+            type: "post",
+            url: "/",
+            data: {val: val, opt: selOp},
+            dataType: "json",
+            success: function (data) {
+                var htm = "";
+                $("#AssociativeSearch").html("");
 
+                data=data.data;
+
+                if(data.length==0)
+                    $("#AssociativeSearch").html("暂无结果");
+                //alert(JSON.stringify(data));
+                for (var i=0;i<data.length;i++){
+                    var data1 = data[i].CORP_NAME;
+                    var html='';
+                    html += '<li'+' id="'+data[i].ID +'">';
+                    html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
+                    html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
+                    html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
+                    html +='</li>';
+                    $("#AssociativeSearch").append(html);
                 }
-            })
-        }
-    });
-}
-jQuery(document).ready(function($){
+                //alert(htm);
+                //closeSearchForm();
+
+                $("#AssociativeSearch").children("li").click(function () {
+
+                    for(var i=0;i<data.length;i++){
+                        console.log("data[i].ID :" + data[i].ID);
+                        console.log("$(this).attr('id') :" + $(this).attr('id'));
+                        if(data[i].ID == $(this).attr('id')){
+                            WriteCorpDetailMsg(data[i]);
+                            closeSearchForm();
+                            break;
+                        }
+
+                    }
+                })
+            }
+        });
+    }
+
+    function WriteCorpDetailMsg(data) {
+
+
+        $("#CORP_NAME").html(data.CORP_NAME);
+        //电话
+        $("#PhoneNum").html(data.TEL);
+        //官网
+        $("#OfficialWeb").html(data.WEB_URL);
+        //邮箱
+        $("#MailAdd").html(data.EMAIL);
+        //地址
+        $("#ComAddr").html(data.ADDR);
+
+        //附近公司
+        // $("#NearCom").html(data.);
+
+        //登记机关
+        $("#BELONG_ORG").html(data.BELONG_ORG);
+        //所属地区
+        $("#BELONG_DIST_ORG").html(data.BELONG_DIST_ORG);
+        //所属行业
+        $("#BELONG_TRADE").html(data.BELONG_TRADE);
+        //公司类型
+        $("#ECON_KIND").html(data.ECON_KIND);
+        //企业大类
+        $("#ADMIT_MAIN").html(data.ADMIT_MAIN);
+        //成立日期
+        $("#START_DATE").html(data.START_DATE);
+        //核准日期
+        $("#CHECK_DATE").html(data.CHECK_DATE);
+        //法人证件
+        $("#OPER_MAN_IDENT_NO").html(data.OPER_MAN_IDENT_NO);
+        //法人姓名
+        $("#OPER_MAN_NAME").html(data.OPER_MAN_NAME);
+        //经营状态
+        $("#CORP_STATUS").html(data.CORP_STATUS);
+        //注册资金
+        $("#REG_CAPI").html(data.REG_CAPI);
+        //经营期限
+        $("#FARE_TERM_START").html(data.FARE_TERM_START);
+        //注册号
+        $("#UNI_SCID").html(data.UNI_SCID);
+        //从业人数
+        $("#PRAC_PERSON_NUM").html(data.PRAC_PERSON_NUM);
+        //组织机构
+        $("#ORG_INST_CODE").html(data.ORG_INST_CODE);
+        //纳税人
+        $("#TAXPAY_NUM").html(data.TAXPAY_NUM);
+        //人员规模
+        $("#STAFF_SIZE").html(data.STAFF_SIZE);
+        //创建机构
+        $("#CREATE_ORG").html(data.CREATE_ORG);
+        //曾用名
+        $("#FORMER_NAME").html(data.FORMER_NAME);
+        //英文名
+        $("#ENGLISH_NAME").html(data.ENGLISH_NAME);
+        //经营范围
+        $("#FARE_SCOPE").html(data.FARE_SCOPE);
+
+
+    }
+
+
+
+
 
 
     function checkWindowWidth() {
@@ -138,4 +211,4 @@ jQuery(document).ready(function($){
         searchForm.find('.selected-value').text($(this).children('option:selected').text());
     });
     // noinspection JSAnnotator
-});
+
