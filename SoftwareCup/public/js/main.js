@@ -66,13 +66,13 @@
 
         $("#CORP_NAME").html(data.CORP_NAME);
         //电话
-        $("#PhoneNum").html(data.TEL);
+        $("#TEL").html(data.TEL);
         //官网
-        $("#OfficialWeb").html(data.WEB_URL);
+        $("#WEB_URL").html(data.WEB_URL);
         //邮箱
-        $("#MailAdd").html(data.EMAIL);
+        $("#EMAIL").html(data.EMAIL);
         //地址
-        $("#ComAddr").html(data.ADDR);
+        $("#ADDR").html(data.ADDR);
 
         //附近公司
         // $("#NearCom").html(data.);
