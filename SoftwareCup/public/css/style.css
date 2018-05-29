@@ -980,3 +980,157 @@ JavaScript Disabled
 .no-js .cd-main-search .selected-value {
   display: none;
 }
+.ComInfo{
+  height:1250px;
+  width:800px;
+  background-color: white;
+  padding: 25px;
+  margin-top:25px;
+  box-shadow: 5px 5px 5px 5px rgba(0,00,0,0.5);
+}
+.ComLogo{
+  box-shadow: 1px 1px 1px 1px rgba(0,00,0,0.5);
+  height:280px;
+  width:210px;
+  float:left;
+}
+.BaseInfo{
+  height:200px;
+  width:515px;
+  margin-left:25px;
+  float: left;
+  display: inline;
+}
+#ComName{
+  width: 505px;
+  background-color: cornsilk;
+  height:120px;
+
+  margin-top:0px;
+}
+.FontSize-big{
+  font-size: 35px;
+  line-height: 50px;
+}
+.FontSize-middle{
+  font-size: 20px;
+}
+
+.DetailInfo{
+  width:750px;
+  height:800px;
+  float: left;
+  margin-top:25px;
+}
+#PhoneNum{
+  margin-left: 10px;
+  line-height: 33px;
+  width:480px;
+  line-height: 33px;
+}
+#OfficialWeb{
+  margin-left: 10px;
+  line-height: 33px;
+  width:480px;
+  background-color: #f0efee;
+}
+#MailAdd
+{
+  margin-left: 10px;
+  line-height: 33px;
+  width:480px;
+}
+#NearCom{
+
+  margin-left: 10px;
+  line-height: 33px;
+  width:480px;
+  color: cadetblue;
+  cursor: pointer;
+}
+#ComAddr
+{
+  margin-left: 10px;
+  line-height: 33px;
+  width:480px;
+  background-color: #f0efee;
+}
+.Detail-Left{
+  float:left;
+  height:598px;
+  width:375px;
+}
+.Detail-Right{
+  float:left;
+  height:598px;
+  width:375px;
+}
+.JiHang{
+  width: 376px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border:1px solid black;
+  background-color: lightblue;
+}
+.OuHang{
+  width: 376px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border:1px solid black;
+  background-color: white;
+}
+.Detail-Title{
+  width: 100px;
+  height: 60px;
+  border-right:1px solid black;
+  float: left;
+}
+.Detail-Content{
+  width: 260px;
+  height: 60px;
+  float: left;
+  line-height: 30px;
+  overflow: hidden;
+  display: table;
+}
+.FontSize-Small{
+  font-size: 15px;
+}
+.FareScope
+{
+  width:751px;
+  height:300px;
+  float: left;
+  border:1px solid black;
+}
+.ScopeTitle
+{
+  width: 100px;
+  height: 299px;
+  line-height: 299px;
+  border:1px solid black;
+  text-align: center;
+  float: left;
+  background-color: lightblue;
+}
+.FareScopeContent{
+  height: 299px;
+  width: 750px;
+  line-height: 50px;
+}
+#FARE_SCOPE{
+  height: 299px;
+  width: 650px;
+  line-height: 50px;
+  padding: 20px;
+}
+#main-baseinfo{
+  visibility:hidden;
+  position:absolute;
+}
+#main-welcome{
+  visibility: hidden;
+  position:absolute;
+}

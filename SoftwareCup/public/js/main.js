@@ -10,8 +10,7 @@
         searchTrigger = $('.cd-search-trigger'),
         coverLayer = $('.cd-cover-layer'),
         navigationTrigger = $('.cd-nav-trigger'),
-        mainHeader = $('.cd-main-header'),
-        mainContent=$('.cd-main-content');
+        mainHeader = $('.cd-main-header');
 
     function subfunc() {
         searchSuggest.show();
