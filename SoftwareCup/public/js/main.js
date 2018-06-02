@@ -13,6 +13,7 @@
         mainHeader = $('.cd-main-header');
 
     function subfunc() {
+        DrawGrap();
         searchSuggest.show();
         var val = $(".cd-textedit").val();
         var selOp = $("#select-category").val();
@@ -159,7 +160,6 @@
     }
 
     function closeSearchForm() {
-       DrawGrap();
         searchTrigger.removeClass('search-form-visible');
         searchForm.removeClass('is-visible');
         coverLayer.removeClass('search-form-visible');
@@ -214,10 +214,10 @@
     function DrawGrap()
     {
 
-        var width = 960,
-            height = 500
-
-        var svg = d3.select("body").append("svg")
+        var width = 798,
+            height = 898;
+        $('.grap').html('');
+        var svg = d3.select(".grap").append("svg")
             .attr("width", width)
             .attr("height", height);
 
