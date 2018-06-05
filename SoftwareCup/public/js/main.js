@@ -13,7 +13,7 @@
         mainHeader = $('.cd-main-header');
 
     function subfunc() {
-        DrawGrap();
+        // DrawGrap();
         searchSuggest.show();
         var val = $(".cd-textedit").val();
         var selOp = $("#select-category").val();
@@ -222,33 +222,32 @@
             .attr("height", height);
 
         var force = d3.layout.force()
-            .gravity(0.05)
+            .gravity(0.01)
             .distance(100)
             .charge(-100)
             .size([width, height]);
 
-        d3.json("graph.json", function(error, json) {
-            if (error) throw error;
+        // d3.json("graph.json", function(error, json) {
+        //     if (error) throw error;
             var json={};
             json.nodes=[
-                {"name":"Myriel","group":1},
-                {"name":"Napoleon","group":1},
-                {"name":"Mlle.Baptistine","group":1},
-                {"name":"Mme.Magloire","group":1},
-                {"name":"CountessdeLo","group":2},
-                {"name":"Geborand","group":2},
-                {"name":"Champtercier","group":2},
-                {"name":"Cravatte","group":2},
-                {"name":"Count","group":2}
+                {"name":"江苏新网软件有限公司","group":0},
+                {"name":"对外投资","group":1},
+                {"name":"股东","group":2},
+                {"name":"常州有限公司","group":1},
+                {"name":"南京有限公司","group":1},
+                {"name":"周伟","group":2},
+                {"name":"于晓梅","group":2}
+                // {"name":"Cravatte","group":2},
+                // {"name":"Count","group":2}
                ];
             json.links = [
-                {"source":1,"target":0,"value":1},
-                {"source":2,"target":0,"value":8},
-                {"source":3,"target":0,"value":10},
-                {"source":3,"target":2,"value":6},
-                {"source":4,"target":0,"value":1},
-                {"source":5,"target":0,"value":1},
-                {"source":6,"target":0,"value":1}
+                {"source":0,"target":1,"value":1},
+                {"source":0,"target":2,"value":1},
+                {"source":1,"target":3,"value":1},
+                {"source":1,"target":4,"value":1},
+                {"source":2,"target":5,"value":1},
+                {"source":2,"target":6,"value":1}
 
                 ];
             console.log("jsona :" + JSON.stringify(json));
@@ -288,6 +287,7 @@
 
                 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             });
-        });
+        // });
     }
 
+    DrawGrap();

@@ -7,7 +7,7 @@ exports.queryDB = function (sql,callback) {
             console.error(err);
             return err;
         }else{
-            console.log( "rows:" + JSON.stringify(rows));
+            // console.log( "rows:" + JSON.stringify(rows));
             callback(rows);
         }
 
