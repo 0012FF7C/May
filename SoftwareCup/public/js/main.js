@@ -32,7 +32,7 @@
                     $("#AssociativeSearch").html("暂无结果");
                 //alert(JSON.stringify(data));
                 for (var i=0;i<data.length;i++){
-                    var data1 = data[i].CORP_NAME;
+                    // var data1 = data[i].CORP_NAME;
                     var html='';
                     html += '<li'+' id="'+data[i].ID +'">';
                     html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
@@ -229,7 +229,29 @@
 
         d3.json("graph.json", function(error, json) {
             if (error) throw error;
+            var json={};
+            json.nodes=[
+                {"name":"Myriel","group":1},
+                {"name":"Napoleon","group":1},
+                {"name":"Mlle.Baptistine","group":1},
+                {"name":"Mme.Magloire","group":1},
+                {"name":"CountessdeLo","group":2},
+                {"name":"Geborand","group":2},
+                {"name":"Champtercier","group":2},
+                {"name":"Cravatte","group":2},
+                {"name":"Count","group":2}
+               ];
+            json.links = [
+                {"source":1,"target":0,"value":1},
+                {"source":2,"target":0,"value":8},
+                {"source":3,"target":0,"value":10},
+                {"source":3,"target":2,"value":6},
+                {"source":4,"target":0,"value":1},
+                {"source":5,"target":0,"value":1},
+                {"source":6,"target":0,"value":1}
 
+                ];
+            console.log("jsona :" + JSON.stringify(json));
             force
                 .nodes(json.nodes)
                 .links(json.links)

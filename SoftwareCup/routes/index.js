@@ -20,15 +20,14 @@ router.post('/', function(req, res, next) {
     console.log("val :"+ val);
     console.log("opt :"+ opt);
 
-    console.log("sql :" + sql);
     if(opt === "TorpBaseInfo"){
-        var sql = "select * from t_corp where CORP_NAME like '%" + val+"%'";
+        var sql = "select * from t_corp where CORP_NAME like '%" + val+"%' limit 10 ";
         DBTCorpDist.queryDB(sql,function (data) {//企业基本信息
             console.log("data :"+ JSON.stringify(data));
             res.send({ data: data });
         });
     }else if(opt === "OwnershipStructure"){//股权结构
-        var sql = "select *";
+        var sql = "select * ";
 
         sql += " from t_corp A ";
 
@@ -42,6 +41,16 @@ router.post('/', function(req, res, next) {
             res.send({ data: data });
         });
     }else if(opt === "InvestmentGenealogy"){//投资族谱
+        var sql = "select * ";
+
+        sql += " from t_corp as A limit 10";
+
+        sql += "left join t_m_corp_corp_stock as M1 on A.ORG=M1.ORG AND A.ID=M1.ID AND A.SEQ_ID=M1.SEQ_ID ";
+
+        sql += "left join T_CORP_STOCK as S on S.ORG=M1.SUB_ORG AND S.ID=M1.SUB_ID AND S.SEQ_ID=M1.SUB_SEQ_ID ";
+
+        sql += "where CORP_NAME like '%" + val+"%' ";
+        sql += "order by "
         DBTCorp.queryDB(sql,function (data) {//企业基本信息
             console.log("data :"+ JSON.stringify(data));
             res.send({ data: data });
