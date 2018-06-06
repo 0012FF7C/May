@@ -1,9 +1,6 @@
 
 SoftwareCup/.idea/workspace.xml
 SoftwareCup/.idea/workspace.xml
-<<<<<<< HEAD
-SoftwareCup/.idea/workspace.xml
-SoftwareCup/.idea/workspace.xml
 SoftwareCup/views/index.ejs
 SoftwareCup/views/index.ejs
 SoftwareCup/.idea/workspace.xml
@@ -12,6 +9,6 @@ SoftwareCup/.idea/workspace.xml
 *.xml
 SoftwareCup/.idea/workspace.xml
 *.xml
-=======
->>>>>>> dc40a4f47702c2ace68716cec7e5b9f5ec838ec8
+
+
 *.xml

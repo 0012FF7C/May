@@ -1,6 +1,4 @@
 
-
-
     var resizing = false,
         navigationWrapper = $('.cd-main-nav-wrapper'),
         navigation = navigationWrapper.children('.cd-main-nav'),
@@ -27,38 +25,40 @@
                 $("#AssociativeSearch").html("");
 
                 data=data.data;
+                writeAssociation(data);
 
-                if(data.length==0)
-                    $("#AssociativeSearch").html("暂无结果");
-                //alert(JSON.stringify(data));
-                for (var i=0;i<data.length;i++){
-                    // var data1 = data[i].CORP_NAME;
-                    var html='';
-                    html += '<li'+' id="'+data[i].ID +'">';
-                    html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
-                    html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
-                    html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
-                    html +='</li>';
-                    $("#AssociativeSearch").append(html);
-                }
-                //alert(htm);
-                //closeSearchForm();
-
-                $("#AssociativeSearch").children("li").click(function () {
-
-                    for(var i=0;i<data.length;i++){
-                        console.log("data[i].ID :" + data[i].ID);
-                        console.log("$(this).attr('id') :" + $(this).attr('id'));
-                        if(data[i].ID == $(this).attr('id')){
-                            WriteCorpDetailMsg(data[i]);
-                            closeSearchForm();
-                            break;
-                        }
-
-                    }
-                })
             }
         });
+    }
+
+    function writeAssociation(data) {
+        if(data.length===0){
+            $("#AssociativeSearch").html("暂无结果");
+        }
+        for (var i=0;i<data.length;i++){
+            // var data1 = data[i].CORP_NAME;
+            var html='';
+            html += '<li'+' id="'+data[i].ID +'">';
+            html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
+            html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
+            html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
+            html +='</li>';
+            $("#AssociativeSearch").append(html);
+        }
+
+        $("#AssociativeSearch").children("li").click(function () {
+
+            for(var i=0;i<data.length;i++){
+                console.log("data[i].ID :" + data[i].ID);
+                console.log("$(this).attr('id') :" + $(this).attr('id'));
+                if(data[i].ID == $(this).attr('id')){
+                    WriteCorpDetailMsg(data[i]);
+                    closeSearchForm();
+                    break;
+                }
+
+            }
+        })
     }
 
     function WriteCorpDetailMsg(data) {

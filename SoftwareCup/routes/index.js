@@ -3,10 +3,10 @@ var router = express.Router();
 
 var DBTCorp = require("../db/DBTCorp");
 var DBTCorpDist = require("../db/DBTCorpDist");
-var DBTCorpPertains = require("../db/DBTCorpPertains");
-var DBTCorpStock = require("../db/DBTCorpStock");
-var DBTMCorpCorpDist = require("../db/DBTMCorpCorpDist");
-var DBTMCorpCorpStock = require("../db/DBTMCorpCorpStock");
+// var DBTCorpPertains = require("../db/DBTCorpPertains");
+// var DBTCorpStock = require("../db/DBTCorpStock");
+// var DBTMCorpCorpDist = require("../db/DBTMCorpCorpDist");
+// var DBTMCorpCorpStock = require("../db/DBTMCorpCorpStock");
 
 router.get('/', function(req, res, next) {
     var val = req.body.val;
@@ -25,7 +25,7 @@ router.post('/association', function(req, res, next) {
             res.send({ data: data });
         });
     }else if(opt === "OwnershipStructure"){//股权结构
-        
+
     }else if(opt === "InvestmentGenealogy"){//投资族谱
 
     }else if(opt === "EnterpriseAtlas"){//企业图谱
@@ -47,8 +47,11 @@ router.post('/', function(req, res, next) {
 
     if(opt === "TorpBaseInfo"){//企业基本信息
         var sql = "select * from t_corp where CORP_NAME like '%" + val+"%' limit 10 ";
-        DBTCorpDist.queryDB(sql,function (data) {
-            console.log("data :"+ JSON.stringify(data));
+        DBTCorpDist.queryDB(sql,function (rows) {
+            console.log("data :"+ JSON.stringify(rows));
+            var data = {};
+            data.type = "TorpBaseInfo";
+            data.content = rows;
             res.send({ data: data });
         });
     }else if(opt === "OwnershipStructure"){//股权结构
@@ -61,8 +64,11 @@ router.post('/', function(req, res, next) {
         sql += "inner join T_CORP_STOCK S on S.ORG=M1.SUB_ORG AND S.ID=M1.SUB_ID AND S.SEQ_ID=M1.SUB_SEQ_ID ";
 
         sql += "where CORP_NAME like '%" + val+"%'";
-        DBTCorp.queryDB(sql,function (data) {
-            console.log("data :"+ JSON.stringify(data));
+        DBTCorpDist.queryDB(sql,function (rows) {
+            console.log("data :"+ JSON.stringify(rows));
+            var data = {};
+            data.type = "OwnershipStructure";
+            data.content = rows;
             res.send({ data: data });
         });
     }else if(opt === "InvestmentGenealogy"){//投资族谱
@@ -129,13 +135,19 @@ router.post('/', function(req, res, next) {
 
         });
     }else if(opt === "EnterpriseAtlas"){//企业图谱
-        DBTCorp.queryDB(sql,function (data) {
-            console.log("data :"+ JSON.stringify(data));
+        DBTCorpDist.queryDB(sql,function (rows) {
+            console.log("data :"+ JSON.stringify(rows));
+            var data = {};
+            data.type = "EnterpriseAtlas";
+            data.content = rows;
             res.send({ data: data });
         });
     }else if(opt === "DoubtfulRelationship"){//疑似关系
-        DBTCorp.queryDB(sql,function (data) {
-            console.log("data :"+ JSON.stringify(data));
+        DBTCorpDist.queryDB(sql,function (rows) {
+            console.log("data :"+ JSON.stringify(rows));
+            var data = {};
+            data.type = "DoubtfulRelationship";
+            data.content = rows;
             res.send({ data: data });
         });
     }else{
