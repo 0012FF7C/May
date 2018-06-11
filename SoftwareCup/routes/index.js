@@ -49,6 +49,9 @@ router.post('/', function(req, res, next) {
     console.log("opt :"+ opt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f1b3004... de
     console.log("sql :" + sql);
     if(opt === "TorpBaseInfo"){
         var sql = "select * from t_corp where CORP_NAME like '%" + val+"%'";
@@ -65,8 +68,12 @@ router.post('/', function(req, res, next) {
             res.send({ data: data });
         });
     }else if(opt === "OwnershipStructure"){//股权结构
+<<<<<<< HEAD
 
         var sql = "select * ";
+=======
+        var sql = "select *";
+>>>>>>> parent of f1b3004... de
 
         sql += " from t_corp A ";
         sql += "inner join t_m_corp_corp_stock M1 on A.ORG=M1.ORG AND A.ID=M1.ID AND A.SEQ_ID=M1.SEQ_ID ";

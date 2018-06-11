@@ -34,6 +34,7 @@
                 for (var i=0;i<data.length;i++){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     var data1 = data[i].CORP_NAME;
 =======
                     // var data1 = data[i].CORP_NAME;
@@ -41,6 +42,9 @@
 =======
                     // var data1 = data[i].CORP_NAME;
 >>>>>>> parent of ef4387f... de
+=======
+                    var data1 = data[i].CORP_NAME;
+>>>>>>> parent of f1b3004... de
                     var html='';
                     html += '<li'+' id="'+data[i].ID +'">';
                     html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
