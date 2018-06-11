@@ -56,13 +56,9 @@ router.post('/', function(req, res, next) {
         });
     }else if(opt === "OwnershipStructure"){//股权结构
         var sql = "select * ";
-
         sql += " from t_corp A ";
-
         sql += "inner join t_m_corp_corp_stock M1 on A.ORG=M1.ORG AND A.ID=M1.ID AND A.SEQ_ID=M1.SEQ_ID ";
-
         sql += "inner join T_CORP_STOCK S on S.ORG=M1.SUB_ORG AND S.ID=M1.SUB_ID AND S.SEQ_ID=M1.SUB_SEQ_ID ";
-
         sql += "where CORP_NAME like '%" + val+"%'";
         DBTCorpDist.queryDB(sql,function (rows) {
             console.log("data :"+ JSON.stringify(rows));
