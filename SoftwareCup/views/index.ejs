@@ -204,6 +204,9 @@
         visibility: visible;
         position:absolute;
     }
+    #main-grap{
+        visibility: hidden;
+    }
     .Owner{
         width: 800px;
         height: 1000px;
@@ -217,12 +220,32 @@
         background-color: white;
     }
     .ComNameInOwner{
+        background-color: #f0efee;
         line-height: 100px;
         font-size: 30px;
         letter-spacing:1px;
         height:100px;
         width: 798px;
     }
+    .GrapContent {
+        width:600px;
+        height:100px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        margin:auto;
+        margin-top:25px;
+    }
+    .GrapContent-big {
+        width:700px;
+        height:120px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        margin:auto;
+        margin-top:25px;
+    }
+
 
 </style>
 <main class="cd-main-content" id="main-owner">
@@ -230,7 +253,21 @@
     <div class="content-center">
         <div class="Owner center-block">
             <div class="ComNameInOwner center-block">某某公司</div>
-            <div class="grap center-block">
+            <div class="GrapContent-big"></div>
+            <div class="GrapContent"></div>
+            <div class="GrapContent"></div>
+            <div class="GrapContent"></div>
+            <div class="GrapContent"></div>
+            </div>
+        </div>
+    </div>
+</main>
+<main class="cd-main-content" id="main-grap">
+    <!-- your content here -->
+    <div class="content-center">
+        <div class="Owner center-block">
+            <div class="ComNameInOwner center-block">某某公司</div>
+            <div class="grap center-block"></div>
             </div>
         </div>
     </div>
