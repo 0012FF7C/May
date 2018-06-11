@@ -839,8 +839,7 @@ Page main content
 .cd-main-content {
   display: table;
   width: 100%;
-  /*height: calc(100vh - 50px);*/
-  height: 1000px;
+  height: calc(100vh - 50px);
   position: relative;
   z-index: 2;
   background-color: #40508e;

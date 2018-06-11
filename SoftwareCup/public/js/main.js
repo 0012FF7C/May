@@ -1,4 +1,6 @@
 
+
+
     var resizing = false,
         navigationWrapper = $('.cd-main-nav-wrapper'),
         navigation = navigationWrapper.children('.cd-main-nav'),
@@ -11,7 +13,7 @@
         mainHeader = $('.cd-main-header');
 
     function subfunc() {
-        // DrawGrap();
+        DrawGrap();
         searchSuggest.show();
         var val = $(".cd-textedit").val();
         var selOp = $("#select-category").val();
@@ -25,40 +27,38 @@
                 $("#AssociativeSearch").html("");
 
                 data=data.data;
-                writeAssociation(data);
 
+                if(data.length==0)
+                    $("#AssociativeSearch").html("暂无结果");
+                //alert(JSON.stringify(data));
+                for (var i=0;i<data.length;i++){
+                    var data1 = data[i].CORP_NAME;
+                    var html='';
+                    html += '<li'+' id="'+data[i].ID +'">';
+                    html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
+                    html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
+                    html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
+                    html +='</li>';
+                    $("#AssociativeSearch").append(html);
+                }
+                //alert(htm);
+                //closeSearchForm();
+
+                $("#AssociativeSearch").children("li").click(function () {
+
+                    for(var i=0;i<data.length;i++){
+                        console.log("data[i].ID :" + data[i].ID);
+                        console.log("$(this).attr('id') :" + $(this).attr('id'));
+                        if(data[i].ID == $(this).attr('id')){
+                            WriteCorpDetailMsg(data[i]);
+                            closeSearchForm();
+                            break;
+                        }
+
+                    }
+                })
             }
         });
-    }
-
-    function writeAssociation(data) {
-        if(data.length===0){
-            $("#AssociativeSearch").html("暂无结果");
-        }
-        for (var i=0;i<data.length;i++){
-            // var data1 = data[i].CORP_NAME;
-            var html='';
-            html += '<li'+' id="'+data[i].ID +'">';
-            html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
-            html += '<h4><a class="cd-nowrap" href="#0">'+data[i].CORP_NAME + '</a></h4>';
-            html += '<time datetime="2016-01-12">'+ data[i].CHECK_DATE + '</time>';
-            html +='</li>';
-            $("#AssociativeSearch").append(html);
-        }
-
-        $("#AssociativeSearch").children("li").click(function () {
-
-            for(var i=0;i<data.length;i++){
-                console.log("data[i].ID :" + data[i].ID);
-                console.log("$(this).attr('id') :" + $(this).attr('id'));
-                if(data[i].ID == $(this).attr('id')){
-                    WriteCorpDetailMsg(data[i]);
-                    closeSearchForm();
-                    break;
-                }
-
-            }
-        })
     }
 
     function WriteCorpDetailMsg(data) {
@@ -222,35 +222,14 @@
             .attr("height", height);
 
         var force = d3.layout.force()
-            .gravity(0.01)
+            .gravity(0.05)
             .distance(100)
             .charge(-100)
             .size([width, height]);
 
-        // d3.json("graph.json", function(error, json) {
-        //     if (error) throw error;
-            var json={};
-            json.nodes=[
-                {"name":"江苏新网软件有限公司","group":0},
-                {"name":"对外投资","group":1},
-                {"name":"股东","group":2},
-                {"name":"常州有限公司","group":1},
-                {"name":"南京有限公司","group":1},
-                {"name":"周伟","group":2},
-                {"name":"于晓梅","group":2}
-                // {"name":"Cravatte","group":2},
-                // {"name":"Count","group":2}
-               ];
-            json.links = [
-                {"source":0,"target":1,"value":1},
-                {"source":0,"target":2,"value":1},
-                {"source":1,"target":3,"value":1},
-                {"source":1,"target":4,"value":1},
-                {"source":2,"target":5,"value":1},
-                {"source":2,"target":6,"value":1}
+        d3.json("graph.json", function(error, json) {
+            if (error) throw error;
 
-                ];
-            console.log("jsona :" + JSON.stringify(json));
             force
                 .nodes(json.nodes)
                 .links(json.links)
@@ -287,7 +266,6 @@
 
                 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             });
-        // });
+        });
     }
 
-    DrawGrap();

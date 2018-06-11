@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="zh" class="no-js">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,288 +15,328 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/modernizr.js"></script>
     <script src="js/d3.v3.min.js"></script>
-</head>
 
+</head>
 <body>
-    <header class="cd-main-header animate-search">
-        <div class="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div>
-        <nav class="cd-main-nav-wrapper">
-            <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
-            <ul class="cd-main-nav">
-                <li><a href="#0">Products</a></li>
-                <li><a href="#0">Store</a></li>
-                <li><a href="#0">Blog</a></li>
-                <li><a href="#0">Contact</a></li>
-            </ul>
-            <!-- .cd-main-nav -->
-        </nav>
-        <!-- .cd-main-nav-wrapper -->
-        <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
-    </header>
-    <main class="cd-main-content" id="main-welcome">
-        <!-- your content here -->
-        <div class="content-center">
-            <!-- <h1>Advanced Search Form</h1> -->
-            <header class="htmleaf-header">
-                <h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>
-                <div class="htmleaf-links">
-                    <a class="htmleaf-icon icon-htmleaf-home-outline" href="/"><span> jQuery之家</span></a>
-                    <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)"><span> 返回下载页</span></a>
+<header class="cd-main-header animate-search">
+    <div class="cd-logo"><a href="#0"><img src="img/cd-logo.svg" alt="Logo"></a></div>
+
+    <nav class="cd-main-nav-wrapper">
+        <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
+
+        <ul class="cd-main-nav">
+            <li><a href="#0">Products</a></li>
+            <li><a href="#0">Store</a></li>
+            <li><a href="#0">Blog</a></li>
+            <li><a href="#0">Contact</a></li>
+        </ul> <!-- .cd-main-nav -->
+    </nav> <!-- .cd-main-nav-wrapper -->
+
+    <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
+</header>
+
+<main class="cd-main-content" id="main-welcome">
+    <!-- your content here -->
+    <div class="content-center">
+        <!-- <h1>Advanced Search Form</h1> -->
+        <header class="htmleaf-header">
+            <h1>企业数据分析<span>大连理工大学软件学院0012FF7C团队</span></h1>
+            <div class="htmleaf-links">
+                <a class="htmleaf-icon icon-htmleaf-home-outline" href="/"  ><span> jQuery之家</span></a>
+                <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" onclick="window.history.go(-1)" ><span> 返回下载页</span></a>
+            </div>
+
+        </header>
+    </div>
+</main>
+<main class=" cd-main-content" id="main-baseinfo">
+    <div class="center-block">
+        <div class="ComInfo center-block">
+            <img class="ComLogo" src="img/placeholder.png"></img>
+            <div class="BaseInfo">
+                <div class="text-center FontSize-big" id="ComName" style="display: table;">
+                    <div id="CORP_NAME" style="text-align:center;display:table-cell;vertical-align:middle;">大连某家有限公司</div>
                 </div>
-            </header>
-        </div>
-    </main>
-    <main class=" cd-main-content" id="main-baseinfo">
-        <div class="center-block">
-            <div class="ComInfo center-block">
-                <img class="ComLogo" src="img/placeholder.png"></img>
-                <div class="BaseInfo">
-                    <div class="text-center FontSize-big" id="ComName" style="display: table;">
-                        <div id="CORP_NAME" style="text-align:center;display:table-cell;vertical-align:middle;">大连某家有限公司</div>
+                <div class="FontSize-middle" id="PhoneNum">电话 :<div id="TEL" style="float: right"> 18742588291</div></div>
+                <div class="FontSize-middle" id="OfficialWeb">官网 :<div id="WEB_URL" style="float: right"> www.coding_jiang.com.cn</div></div>
+                <div class="FontSize-middle" id="MailAdd">邮箱 : <div id="EMAIL" style="float: right">coding_jiang@outlook.com</div></div>
+                    <div class="FontSize-middle" style="float: left;" id="ComAddr">地址 : <div id="ADDR" style="float: right">大连理工大学</div></div>
+                <div class="FontSize-middle" id="NearCom"style="float: left;"  onclick="console.log('待完善');" >附近公司</div>
+            </div>
+            <div class="DetailInfo">
+                <div class="Detail-Left">
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >登记机关</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="BELONG_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
                     </div>
-                    <div class="FontSize-middle" id="PhoneNum">电话 :
-                        <div id="TEL" style="float: right"> 18742588291</div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >所属地区</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="BELONG_DIST_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
                     </div>
-                    <div class="FontSize-middle" id="OfficialWeb">官网 :
-                        <div id="WEB_URL" style="float: right"> www.coding_jiang.com.cn</div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >所属行业</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="BELONG_TRADE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
                     </div>
-                    <div class="FontSize-middle" id="MailAdd">邮箱 :
-                        <div id="EMAIL" style="float: right">coding_jiang@outlook.com</div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >公司类型</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="ECON_KIND" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
                     </div>
-                    <div class="FontSize-middle" style="float: left;" id="ComAddr">地址 :
-                        <div id="ADDR" style="float: right">大连理工大学</div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >企业大类</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="ADMIT_MAIN" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
                     </div>
-                    <div class="FontSize-middle" id="NearCom" style="float: left;" onclick="console.log('待完善');">附近公司</div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >成立日期</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="START_DATE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >核准日期</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="CHECK_DATE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >法人证件</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="OPER_MAN_IDENT_NO" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >法人姓名</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="OPER_MAN_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >经营状态</div>
+                        <div class="Detail-Content FontSize-Small">
+                        <div id="CORP_STATUS" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="DetailInfo">
-                    <div class="Detail-Left">
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">登记机关</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="BELONG_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">所属地区</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="BELONG_DIST_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">所属行业</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="BELONG_TRADE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">公司类型</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="ECON_KIND" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">企业大类</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="ADMIT_MAIN" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">成立日期</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="START_DATE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">核准日期</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="CHECK_DATE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">法人证件</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="OPER_MAN_IDENT_NO" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">法人姓名</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="OPER_MAN_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">经营状态</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="CORP_STATUS" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
+                <div class="Detail-Right">
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >注册资金</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="REG_CAPI" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
                         </div>
                     </div>
-                    <div class="Detail-Right">
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">注册资金</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="REG_CAPI" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">经营期限</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="FARE_TERM_START" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">注册号</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="UNI_SCID" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">从业人数</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="PRAC_PERSON_NUM" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">组织机构</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="ORG_INST_CODE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">纳税人</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="TAXPAY_NUM" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">人员规模</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="STAFF_SIZE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">创建机构</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="CREATE_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle JiHang">
-                            <div class="Detail-Title FontSize-middle ">曾用名</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="FORMER_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
-                        </div>
-                        <div class="FontSize-middle OuHang">
-                            <div class="Detail-Title FontSize-middle ">英文名</div>
-                            <div class="Detail-Content FontSize-Small">
-                                <div id="ENGLISH_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
-                            </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >经营期限</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="FARE_TERM_START" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
                         </div>
                     </div>
-                    <div class="FareScope">
-                        <div class="FontSize-middle ScopeTitle">经营范围</div>
-                        <div class="FareScopeContent FontSize-Small">
-                            <div id="FARE_SCOPE" style="display:table-cell;vertical-align:middle; overflow: hidden;">计算机软件开发、销售及相关产品培训，计算机应用服务，线路、管道、设备安装，电子产品及通信设备技术服务，电子仪器的生产与销售，电子计算机及配件、五金、交电、百货、化工原料及产品、汽车、建筑材料销售，商品信息咨询。（依法须经批准的项目，经相关部门批准后方可开展经营活动）</div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >注册号</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="UNI_SCID" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
                         </div>
                     </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >从业人数</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="PRAC_PERSON_NUM" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >组织机构</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="ORG_INST_CODE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >纳税人</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="TAXPAY_NUM" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >人员规模</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="STAFF_SIZE" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >创建机构</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="CREATE_ORG" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle JiHang">
+                        <div class="Detail-Title FontSize-middle " >曾用名</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="FORMER_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                    <div class="FontSize-middle OuHang">
+                        <div class="Detail-Title FontSize-middle " >英文名</div>
+                        <div class="Detail-Content FontSize-Small">
+                            <div id="ENGLISH_NAME" style="display:table-cell;vertical-align:middle; overflow: hidden;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="FareScope">
+                    <div class="FontSize-middle ScopeTitle">经营范围</div>
+                    <div class="FareScopeContent FontSize-Small">
+                        <div id="FARE_SCOPE" style="display:table-cell;vertical-align:middle; overflow: hidden;">计算机软件开发、销售及相关产品培训，计算机应用服务，线路、管道、设备安装，电子产品及通信设备技术服务，电子仪器的生产与销售，电子计算机及配件、五金、交电、百货、化工原料及产品、汽车、建筑材料销售，商品信息咨询。（依法须经批准的项目，经相关部门批准后方可开展经营活动）</div>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </main>
-    <style>
-    #main-owner {
+    </div>
+</main>
+<style>
+    #main-owner{
         visibility: visible;
-        position: absolute;
+        position:absolute;
     }
-
-    .Owner {
+    #main-grap{
+        visibility: hidden;
+    }
+    .Owner{
         width: 800px;
         height: 1000px;
         background-color: whitesmoke;
-        opacity: 0.9;
+        opacity:0.9;
         box-shadow: 5px 5px 5px 5px black;
     }
-
-    .grap {
+    .grap{
         width: 798px;
         height: 898px;
         background-color: white;
     }
-
-    .ComNameInOwner {
+    .ComNameInOwner{
+        background-color: #f0efee;
         line-height: 100px;
         font-size: 30px;
-        letter-spacing: 1px;
-        height: 100px;
+        letter-spacing:1px;
+        height:100px;
         width: 798px;
     }
-    </style>
-    <main class="cd-main-content" id="main-owner">
-        <!-- your content here -->
-        <div class="content-center">
-            <div class="Owner center-block">
-                <div class="ComNameInOwner center-block">某某公司</div>
-                <div class="grap center-block">
-                </div>
+    .GrapContent {
+        width:600px;
+        height:100px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        margin:auto;
+        margin-top:25px;
+    }
+    .GrapContent-big {
+        width:700px;
+        height:120px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        margin:auto;
+        margin-top:25px;
+    }
+
+
+</style>
+<main class="cd-main-content" id="main-owner">
+    <!-- your content here -->
+    <div class="content-center">
+        <div class="Owner center-block">
+            <div class="ComNameInOwner center-block">某某公司</div>
+            <div class="GrapContent-big"></div>
+            <div class="GrapContent"></div>
+            <div class="GrapContent"></div>
+            <div class="GrapContent"></div>
+            <div class="GrapContent"></div>
             </div>
         </div>
-    </main>
-    <div id="search" class="cd-main-search">
-        <form>
-            <input class="cd-textedit" oninput="subfunc()" autocomplete="off" type="search" placeholder="Search...">
-            <div class="cd-select">
-                <span>in</span>
-                <select id="select-category">
-                    <option value="TorpBaseInfo">企业基本信息</option>
-                    <option value="OwnershipStructure">股权结构</option>
-                    <option value="InvestmentGenealogy">投资族谱</option>
-                    <option value="EnterpriseAtlas">企业图谱</option>
-                    <option value="DoubtfulRelationship">疑似关系</option>
-                </select>
-                <span class="selected-value">企业基本信息</span>
+    </div>
+</main>
+<main class="cd-main-content" id="main-grap">
+    <!-- your content here -->
+    <div class="content-center">
+        <div class="Owner center-block">
+            <div class="ComNameInOwner center-block">某某公司</div>
+            <div class="grap center-block"></div>
             </div>
-        </form>
-        <div class="cd-search-suggestions">
-            <div class="responses">
-                <div class="scrollbar"></div>
-                <h3>查询结果</h3>
-                <ul id="AssociativeSearch">
-                    <!--<li>-->
+        </div>
+    </div>
+</main>
+
+
+<div id="search" class="cd-main-search">
+    <form>
+        <input class="cd-textedit" oninput="subfunc()" autocomplete="off" type="search" placeholder="Search...">
+
+        <div class="cd-select">
+            <span>in</span>
+            <select id="select-category">
+                <option value="TorpBaseInfo" >企业基本信息</option>
+                <option value="OwnershipStructure">股权结构</option>
+                <option value="InvestmentGenealogy">投资族谱</option>
+                <option value="EnterpriseAtlas">企业图谱</option>
+                <option value="DoubtfulRelationship">疑似关系</option>
+            </select>
+            <span class="selected-value">企业基本信息</span>
+        </div>
+    </form>
+
+    <div class="cd-search-suggestions">
+        <div class="responses">
+            <div class="scrollbar"></div>
+            <h3>查询结果</h3>
+            <ul id="AssociativeSearch">
+                <!--<li>-->
                     <!--<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>-->
                     <!--<h4><a class="cd-nowrap" href="#0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>-->
                     <!--<time datetime="2016-01-12">Feb 03, 2016</time>-->
-                    <!--</li>-->
-                    <!--<li>-->
+                <!--</li>-->
+
+                <!--<li>-->
                     <!--<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>-->
                     <!--<h4><a class="cd-nowrap" href="#0">Incidunt voluptatem adipisci voluptates fugit beatae culpa eum, distinctio, assumenda est ad</a></h4>-->
                     <!--<time datetime="2016-01-12">Jan 28, 2016</time>-->
-                    <!--</li>-->
-                    <!--<li>-->
+                <!--</li>-->
+
+                <!--<li>-->
                     <!--<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>-->
                     <!--<h4><a class="cd-nowrap" href="#0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, esse.</a></h4>-->
                     <!--<time datetime="2016-01-12">Jan 12, 2016</time>-->
-                    <!--</li>-->
-                </ul>
-            </div>
-            <!-- .news -->
-            <!--<div class="quick-links">-->
+                <!--</li>-->
+            </ul>
+        </div> <!-- .news -->
+
+        <!--<div class="quick-links">-->
             <!--<h3>Quick Links</h3>-->
             <!--<ul>-->
-            <!--<li><a href="#0">Find a store</a></li>-->
-            <!--<li><a href="#0">Accessories</a></li>-->
-            <!--<li><a href="#0">Warranty info</a></li>-->
-            <!--<li><a href="#0">Support</a></li>-->
-            <!--<li><a href="#0">Contact us</a></li>-->
+                <!--<li><a href="#0">Find a store</a></li>-->
+                <!--<li><a href="#0">Accessories</a></li>-->
+                <!--<li><a href="#0">Warranty info</a></li>-->
+                <!--<li><a href="#0">Support</a></li>-->
+                <!--<li><a href="#0">Contact us</a></li>-->
             <!--</ul>-->
-            <!--</div>-->
-        </div>
-        <a href="#0" class="close cd-text-replace">Close Form</a>
+        <!--</div>-->
     </div>
-    <div class="cd-cover-layer"></div>
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/main.js"></script>
-    <script type="text/javascript">
-    </script>
-</body>
 
+    <a href="#0" class="close cd-text-replace">Close Form</a>
+</div>
+<div class="cd-cover-layer"></div>
+
+
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
 </html>
