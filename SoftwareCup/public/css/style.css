@@ -1126,14 +1126,7 @@ JavaScript Disabled
   line-height: 50px;
   padding: 20px;
 }
-#main-baseinfo{
-  visibility:hidden;
-  position:absolute;
-}
-#main-welcome{
-  visibility: hidden;
-  position:absolute;
-}
+
 /*拓扑图的风格*/
 .link {
   stroke: #ccc;
@@ -1143,4 +1136,60 @@ JavaScript Disabled
   pointer-events: none;
   font: 10px sans-serif;
 }
+#main-baseinfo{
+  display: none;
+  position:absolute;
+}
+#main-welcome{
+  height: 100%;
+  width: 100%;
+  display: table;
+  position:absolute;
+}
 /****************/
+#main-owner{
+  display: none;
+  position:absolute;
+}
+#main-grap{
+  display: none;
+  position:absolute;
+}
+.Owner{
+  width: 800px;
+  height: 1000px;
+  background-color: whitesmoke;
+  opacity:0.9;
+  box-shadow: 5px 5px 5px 5px black;
+}
+.grap{
+  width: 798px;
+  height: 898px;
+  background-color: white;
+}
+.ComNameInOwner{
+  background-color: #f0efee;
+  line-height: 100px;
+  font-size: 30px;
+  letter-spacing:1px;
+  height:100px;
+  width: 798px;
+}
+.GrapContent {
+  width:600px;
+  height:100px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  margin:auto;
+  margin-top:25px;
+}
+.GrapContent-big {
+  width:700px;
+  height:120px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  margin:auto;
+  margin-top:25px;
+}

@@ -10,19 +10,20 @@
         searchTrigger = $('.cd-search-trigger'),
         coverLayer = $('.cd-cover-layer'),
         navigationTrigger = $('.cd-nav-trigger'),
-        mainHeader = $('.cd-main-header');
+        mainHeader = $('.cd-main-header'),
+        NowDis="main-welcome";
+
 
     function subfunc() {
-        DrawGrap();
         searchSuggest.show();
         var val = $(".cd-textedit").val();
         var selOp = $("#select-category").val();
         $.ajax({
-            type: "post",
-            url: "/",
-            data: {val: val, opt: selOp},
-            dataType: "json",
-            success: function (data) {
+                type: "post",
+                url: "/association",
+                data: {val: val, opt: selOp},
+                dataType: "json",
+                success: function (data) {
                 var htm = "";
                 $("#AssociativeSearch").html("");
 
@@ -32,19 +33,7 @@
                     $("#AssociativeSearch").html("暂无结果");
                 //alert(JSON.stringify(data));
                 for (var i=0;i<data.length;i++){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                     var data1 = data[i].CORP_NAME;
-=======
-                    // var data1 = data[i].CORP_NAME;
->>>>>>> parent of ef4387f... de
-=======
-                    // var data1 = data[i].CORP_NAME;
->>>>>>> parent of ef4387f... de
-=======
-                    var data1 = data[i].CORP_NAME;
->>>>>>> parent of f1b3004... de
                     var html='';
                     html += '<li'+' id="'+data[i].ID +'">';
                     html += '<a class="image-wrapper" href="#0"><img src="img/placeholder.png" alt="News image"></a>';
@@ -57,20 +46,85 @@
                 //closeSearchForm();
 
                 $("#AssociativeSearch").children("li").click(function () {
+                        var selOp = $("#select-category").val();
+                        for (var i = 0; i < data.length; i++) {
+                            console.log("data[i].ID :" + data[i].ID);
+                            console.log("$(this).attr('id') :" + $(this).attr('id'));
+                            if (data[i].ID == $(this).attr('id')) {
 
-                    for(var i=0;i<data.length;i++){
-                        console.log("data[i].ID :" + data[i].ID);
-                        console.log("$(this).attr('id') :" + $(this).attr('id'));
-                        if(data[i].ID == $(this).attr('id')){
-                            WriteCorpDetailMsg(data[i]);
-                            closeSearchForm();
-                            break;
+                                if(selOp=="TorpBaseInfo") {
+                                    hideAll();
+                                    $("#main-baseinfo").css('display','table');
+                                    WriteCorpDetailMsg(data[i]);
+                                    closeSearchForm();
+                                    break;
+                                }
+                                else if(selOp=="OwnershipStructure"){
+                                    hideAll();
+                                    $("#main-owner").css('display','table');
+                                    closeSearchForm();
+                                    $.ajax({
+
+                                        type: "post",
+                                        url: "/",
+                                        data: {val: data[i].CORP_NAME, opt: selOp},
+                                        dataType: "json",
+                                        success: function (data) {
+
+                                            $("#Owner_1").html('');
+                                            data=data.data;
+                                            var temp=document.createElement( "div" );
+                                            temp.className="ComNameInOwner center-block";
+                                            console.log("data[0]"+JSON.stringify(data[0]));
+                                            temp.innerHTML=data[0].corp_name;
+                                            $("#Owner_1").append(temp);
+
+                                            temp=document.createElement( "div" );
+                                            temp.className="GrapContent-big";
+                                            console.log("data[0]"+JSON.stringify(data[0]));
+                                            var str=data[0].STOCK_NAME+" 出资占比 "+ Number(data[0].STOCK_PERCENT)*100+"%";
+                                            temp.innerHTML=str;
+                                            $("#Owner_1").append(temp);
+
+                                            if(data.length>1) {
+                                                for (var i = 1; i < data.length ; i++) {
+                                                    temp = document.createElement("div");
+                                                    temp.className = "GrapContent";
+                                                    console.log("data[0]" + JSON.stringify(data[i]));
+                                                    var str=data[i].STOCK_NAME+" 出资占比 "+ Number(data[i].STOCK_PERCENT)*100+"%";
+                                                    temp.innerHTML = str;
+                                                    $("#Owner_1").append(temp);
+                                                }
+                                            }
+                                        }
+                                    })
+                                }
+                                else if(selOp=="InvestmentGenealogy") {
+                                    hideAll();
+                                    $("#main-grap").css('display','table');
+                                    $.ajax({
+                                        type: "post",
+                                        url: "/",
+                                        data: {val: data[i].CORP_NAME, opt: selOp},
+                                        dataType: "json",
+                                        success: function (data) {
+                                            data=data.data;
+                                            DrawGrap(data.node,data.link);
+                                        }
+                                    })
+                                }
+
+                            }
+
                         }
 
-                    }
+
                 })
             }
         });
+    }
+    function hideAll() {
+        $(".cd-main-content").css('display','none');
     }
 
     function WriteCorpDetailMsg(data) {
@@ -223,7 +277,7 @@
         searchForm.find('.selected-value').text($(this).children('option:selected').text());
     });
     // noinspection JSAnnotator
-    function DrawGrap()
+    function DrawGrap(nodes,links)
     {
 
         var width = 798,
@@ -234,26 +288,21 @@
             .attr("height", height);
 
         var force = d3.layout.force()
-            .gravity(0.05)
+            .gravity(0)
             .distance(100)
-            .charge(-100)
-            .size([width, height]);
-
-        d3.json("graph.json", function(error, json) {
-            if (error) throw error;
 
             force
-                .nodes(json.nodes)
-                .links(json.links)
+                .nodes(nodes)
+                .links(links)
                 .start();
 
             var link = svg.selectAll(".link")
-                .data(json.links)
+                .data(links)
                 .enter().append("line")
                 .attr("class", "link");
 
             var node = svg.selectAll(".node")
-                .data(json.nodes)
+                .data(nodes)
                 .enter().append("g")
                 .attr("class", "node")
                 .call(force.drag);
@@ -278,6 +327,6 @@
 
                 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             });
-        });
+
     }
 
