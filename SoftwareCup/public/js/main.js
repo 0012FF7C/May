@@ -108,6 +108,7 @@
                                         data: {val: data[i].CORP_NAME, opt: selOp},
                                         dataType: "json",
                                         success: function (data) {
+                                            $("#ComNameGraph").html(data.data.node[0].name+"投资图谱");
                                             data=data.data;
                                             DrawGrap(data.node,data.link);
                                         }
@@ -279,7 +280,6 @@
     // noinspection JSAnnotator
     function DrawGrap(nodes,links)
     {
-
         var width = 798,
             height = 898;
         $('.grap').html('');
@@ -288,8 +288,13 @@
             .attr("height", height);
 
         var force = d3.layout.force()
-            .gravity(0)
+            .gravity(0.04)
+            .size([width, height])
             .distance(100)
+            .charge(-100)
+            .on("tick",tick);
+        var drag = force.drag()
+            .on("dragstart", dragstart);
 
             force
                 .nodes(nodes)
@@ -305,14 +310,15 @@
                 .data(nodes)
                 .enter().append("g")
                 .attr("class", "node")
+                .on("dblclick", dblclick)
                 .call(force.drag);
 
-            node.append("image")
-                .attr("xlink:href", "https://github.com/favicon.ico")
-                .attr("x", -8)
-                .attr("y", -8)
-                .attr("width", 16)
-                .attr("height", 16);
+        node.append("image")
+            .attr("xlink:href", "https://github.com/favicon.ico")
+            .attr("x", -8)
+            .attr("y", -8)
+            .attr("width", 16)
+            .attr("height", 16);
 
             node.append("text")
                 .attr("dx", 12)
@@ -327,6 +333,21 @@
 
                 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             });
+        function dblclick(d) {
+            d3.select(this).classed("fixed", d.fixed = false);
+        }
+        function dragstart(d) {
+            d3.select(this).classed("fixed", d.fixed = true);
+        }
+        function tick() {
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            node.attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; });
+        }
 
     }
 

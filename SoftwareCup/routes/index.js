@@ -56,6 +56,7 @@ router.post('/', function(req, res, next) {
             var node=[];
             var link=[];
             var corpname = {};
+            corpname.size=7000;
             corpname.name = val;
             corpname.group=0;
             node.push(corpname);
@@ -63,11 +64,13 @@ router.post('/', function(req, res, next) {
             var outward={};
             outward.name="对外投资";
             outward.group=1;
+            outward.size=5000;
             node.push(outward);
 
             var owners={};
             owners.name="股东";
             owners.group=2;
+            owners.size=5000;
             node.push(owners);
 
             link.push({"source":0,"target":1});
@@ -76,6 +79,7 @@ router.post('/', function(req, res, next) {
                 var temp = {};
                 temp.name = data[i].STOCK_NAME;
                 temp.group=2;
+                temp.size=3000;
                 node.push(temp);
                 link.push({"source":2,"target":3+i});
             }
@@ -92,6 +96,7 @@ router.post('/', function(req, res, next) {
                     var temp = {};
                     temp.name = data[i].STOCK_NAME;
                     temp.group=1;
+                    temp.size=3000;
                     node.push(temp);
                     link.push({"source":1,"target":len+i});
                 }
