@@ -1128,19 +1128,18 @@ JavaScript Disabled
 }
 
 /*拓扑图的风格*/
-.node {
-  cursor: pointer;
-}
-
-.link {
-  fill: none;
-  stroke: #9ecae1;
+.node circle{
+  fill:#fff;
+  stroke:steelblue;
   stroke-width: 1.5px;
 }
-
-.node text {
-  pointer-events: none;
-  font: 10px sans-serif;
+.node{
+  font: 12px sans-serif;
+}
+.link{
+  fill:none;
+  stroke:#ccc;
+  stroke-width: 1.5px;
 }
 #main-baseinfo{
   display: none;
@@ -1149,7 +1148,7 @@ JavaScript Disabled
 #main-welcome{
   height: 100%;
   width: 100%;
-  display: table;
+  display: none;
   position:absolute;
 }
 /****************/
@@ -1158,7 +1157,7 @@ JavaScript Disabled
   position:absolute;
 }
 #main-grap{
-  display: none;
+  display: table;
   position:absolute;
 }
 .Owner{
@@ -1170,7 +1169,7 @@ JavaScript Disabled
 }
 .grap{
   width: 798px;
-  height: 898px;
+  height: 848px;
   background-color: white;
 }
 .ComNameInOwner{

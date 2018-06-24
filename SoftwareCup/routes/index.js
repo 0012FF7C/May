@@ -125,9 +125,42 @@ router.post('/', function(req, res, next) {
 
 });
 
+router.post('/owner', function(req, res, next) {
+    var val = req.body.val;
+    var opt = req.body.opt;
+    console.log("val :"+ val);
+    console.log("opt :"+ opt);
+
+    console.log("sql :" + sql);
+        var sql = "select STOCK_NAME from t_corp join t_m_corp_corp_stock on t_corp.ORG=t_m_corp_corp_stock.ORG AND t_corp.ID=t_m_corp_corp_stock.ID AND t_corp.SEQ_ID=t_m_corp_corp_stock.SEQ_ID join t_corp_stock on t_corp_stock.ORG=t_m_corp_corp_stock.SUB_ORG AND t_corp_stock.ID=t_m_corp_corp_stock.SUB_ID AND t_corp_stock.SEQ_ID=t_m_corp_corp_stock.SUB_SEQ_ID where corp_name ='"
+        sql+=val;
+        sql+="' order by stock_capi desc";
+        DBTCorp.queryDB(sql,function (data) {//企业基本信息
+            console.log("data :"+ JSON.stringify(data));
+            res.send({data:data});
+        });
+});
+router.post('/investment', function(req, res, next) {
+    var val = req.body.val;
+    var opt = req.body.opt;
+    console.log("val :"+ val);
+    console.log("opt :"+ opt);
+
+    console.log("sql :" + sql);
+    var sql="select corp_name,STOCK_NAME,STOCK_CAPI,STOCK_PERCENT \n" +
+        " from t_corp join t_m_corp_corp_stock on t_corp.ORG=t_m_corp_corp_stock.ORG AND t_corp.ID=t_m_corp_corp_stock.ID AND t_corp.SEQ_ID=t_m_corp_corp_stock.SEQ_ID \n" +
+        " join t_corp_stock on t_corp_stock.ORG=t_m_corp_corp_stock.SUB_ORG AND t_corp_stock.ID=t_m_corp_corp_stock.SUB_ID AND t_corp_stock.SEQ_ID=t_m_corp_corp_stock.SUB_SEQ_ID \n" +
+        " where STOCK_NAME ='";
+            sql+=val;
+            sql+="'";
+            DBTCorp.queryDB(sql,function (data) {
+                res.send({data:data});
+            });
+});
+
 router.get('/chat', function(req, res, next) {
     res.render('chat', { title: 'chat' });
 });
 
 
-module.exports = router
+module.exports = router;

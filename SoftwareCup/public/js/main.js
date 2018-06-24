@@ -11,7 +11,9 @@
         coverLayer = $('.cd-cover-layer'),
         navigationTrigger = $('.cd-nav-trigger'),
         mainHeader = $('.cd-main-header'),
-        NowDis="main-welcome";
+        NowDis="main-welcome",
+        ownerLayerNumbe=0,
+        nodes={};
 
 
     function subfunc() {
@@ -99,18 +101,90 @@
                                         }
                                     })
                                 }
-                                else if(selOp=="InvestmentGenealogy") {
+                                else if(selOp=="InvestmentGenealogy"&&ownerLayerNumbe==0) {
+                                    $("#ComNameGraph").html(data[i].CORP_NAME+"投资图谱");
                                     hideAll();
                                     $("#main-grap").css('display','table');
+
+                                    var name=data[i].CORP_NAME;
+                                    nodes.name=name;
                                     $.ajax({
                                         type: "post",
-                                        url: "/",
-                                        data: {val: data[i].CORP_NAME, opt: selOp},
+                                        url: "/owner",
+                                        data: {val: name, opt: selOp},
                                         dataType: "json",
                                         success: function (data) {
-                                            $("#ComNameGraph").html(data.data.node[0].name+"投资图谱");
                                             data=data.data;
-                                            DrawGrap(data.node,data.link);
+                                            var pointer=nodes;
+                                            pointer.children=[];
+                                            var owner={name:'股东'};
+                                            pointer.children.push(owner);
+                                            pointer=pointer.children[0];
+                                            pointer.children=[];
+                                            pointer=pointer.children;
+                                            if(data.length==0)
+                                            {var temp={name:"无记录"};pointer.push(temp);}
+                                            for(var i=0;i<data.length;i++)
+                                            {
+                                                var temp={name:data[i].STOCK_NAME,size:3000};
+                                                pointer.push(temp);
+                                            }
+                                            $.ajax({
+                                                type: "post",
+                                                url: "/investment",
+                                                data: {val: name, opt: selOp},
+                                                dataType: "json",
+                                                success: function (data) {
+                                                    data=data.data;
+                                                    var pointer=nodes;
+                                                    var investment={name:"对外投资"};
+                                                    pointer.children.push(investment);
+                                                    pointer=pointer.children[1];
+                                                    pointer.children=[];
+                                                    pointer=pointer.children;
+                                                    for(var i=0;i<data.length;i++)
+                                                    {
+                                                        var temp={name:data[i].corp_name}
+                                                        temp.children=[];
+                                                        pointer.push(temp);
+                                                    }
+                                                    ownerLayerNumbe=1;
+                                                    var node1=JSON.parse(JSON.stringify(nodes));
+                                                    DrawGrap(nodes);
+                                                    $('#up').click(function () {
+                                                        var leaf=[];
+                                                        function visit(e){
+                                                            if(e.children===undefined) {
+                                                                leaf.push(e);
+                                                                return;
+                                                            }
+                                                            else if(e.children.length==0&&e.name!="股东"&&e.name!="对外投资"){
+                                                                leaf.push(e);
+                                                            }
+                                                        }
+                                                        function preOrder(e){
+                                                            visit(e);
+                                                            if(!(e.children===undefined)) {
+                                                                for (var i = 0; i < e.children.length; i++)
+                                                                    preOrder(e.children[i]);
+                                                            }
+                                                        }
+                                                        preOrder(node1);
+                                                        console.log(JSON.stringify(leaf));
+                                                    });
+                                                    $('#down').click(function () {
+                                                        if(ownerLayerNumbe<=1)
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+                                                    });
+
+                                                }
+                                            })
                                         }
                                     })
                                 }
@@ -278,76 +352,52 @@
         searchForm.find('.selected-value').text($(this).children('option:selected').text());
     });
     // noinspection JSAnnotator
-    function DrawGrap(nodes,links)
-    {
-        var width = 798,
-            height = 898;
+    function DrawGrap(nodes) {
+        var width = 690,
+            height = 790;
+        //定义数据转换函数
+        var tree = d3.layout.tree()
+            .size([width,height-200])
+//定义对角线生成器diagonal
+        var diagonal = d3.svg.diagonal()
+            .projection(function(d){return [d.y, d.x]})
+
+//定义svg
         $('.grap').html('');
         var svg = d3.select(".grap").append("svg")
-            .attr("width", width)
-            .attr("height", height);
+            .attr("width",width)
+            .attr("height",height)
+            .append("g")
+            .attr("transform","translate(40,0)")
 
-        var force = d3.layout.force()
-            .gravity(0.04)
-            .size([width, height])
-            .distance(100)
-            .charge(-100)
-            .on("tick",tick);
-        var drag = force.drag()
-            .on("dragstart", dragstart);
 
-            force
-                .nodes(nodes)
-                .links(links)
-                .start();
+        var nodes1 = tree.nodes(nodes);
+        var link = tree.links(nodes1);
 
-            var link = svg.selectAll(".link")
-                .data(links)
-                .enter().append("line")
-                .attr("class", "link");
+        //画点
+        var node = svg.selectAll(".node")
+            .data(nodes1)
+            .enter()
+            .append("g")
+            .attr("class","node")
+            .attr("transform",function(d){return "translate("+ d.y+","+ d.x+")"})
+        //加圈圈
+        node.append("circle")
+            .attr("r",4.5)
+        //加文字
+        node.append("text")
+            .attr("dx",function(d){return d.children?-8:8;})
+            .attr("dy",3)
+            .style("text-anchor", function (d) {return d.children?"end":"start"})
+            .text(function (d) {return d.name})
 
-            var node = svg.selectAll(".node")
-                .data(nodes)
-                .enter().append("g")
-                .attr("class", "node")
-                .on("dblclick", dblclick)
-                .call(force.drag);
-
-        node.append("image")
-            .attr("xlink:href", "https://github.com/favicon.ico")
-            .attr("x", -8)
-            .attr("y", -8)
-            .attr("width", 16)
-            .attr("height", 16);
-
-            node.append("text")
-                .attr("dx", 12)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.name });
-
-            force.on("tick", function() {
-                link.attr("x1", function(d) { return d.source.x; })
-                    .attr("y1", function(d) { return d.source.y; })
-                    .attr("x2", function(d) { return d.target.x; })
-                    .attr("y2", function(d) { return d.target.y; });
-
-                node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-            });
-        function dblclick(d) {
-            d3.select(this).classed("fixed", d.fixed = false);
-        }
-        function dragstart(d) {
-            d3.select(this).classed("fixed", d.fixed = true);
-        }
-        function tick() {
-            link.attr("x1", function(d) { return d.source.x; })
-                .attr("y1", function(d) { return d.source.y; })
-                .attr("x2", function(d) { return d.target.x; })
-                .attr("y2", function(d) { return d.target.y; });
-
-            node.attr("cx", function(d) { return d.x; })
-                .attr("cy", function(d) { return d.y; });
-        }
+        //画线
+        var line = svg.selectAll("link")
+            .data(link)
+            .enter()
+            .append("path")
+            .attr("class","link")
+            .attr("d",diagonal)
 
     }
 
