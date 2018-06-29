@@ -105,7 +105,8 @@
                                     $("#ComNameGraph").html(data[i].CORP_NAME+"投资图谱");
                                     hideAll();
                                     $("#main-grap").css('display','table');
-
+                                    var history=[];
+                                    var index=-1;
                                     var name=data[i].CORP_NAME;
                                     nodes.name=name;
                                     $.ajax({
@@ -126,7 +127,7 @@
                                             {var temp={name:"无记录"};pointer.push(temp);}
                                             for(var i=0;i<data.length;i++)
                                             {
-                                                var temp={name:data[i].STOCK_NAME,size:3000};
+                                                var temp={name:data[i].STOCK_NAME,children:[]};
                                                 pointer.push(temp);
                                             }
                                             $.ajax({
@@ -150,7 +151,10 @@
                                                     }
                                                     ownerLayerNumbe=1;
                                                     var node1=JSON.parse(JSON.stringify(nodes));
-                                                    DrawGrap(nodes);
+                                                    var history1=JSON.parse(JSON.stringify(nodes));
+                                                    index++;
+                                                    history.push(history1);
+                                                    DrawGrap(node1);
                                                     $('#up').click(function () {
                                                         var leaf=[];
                                                         function visit(e){
@@ -169,24 +173,141 @@
                                                                     preOrder(e.children[i]);
                                                             }
                                                         }
-                                                        preOrder(node1);
-                                                        console.log(JSON.stringify(leaf));
+                                                        preOrder(nodes);
+                                                        var data=[];
+                                                        for(var i=0;i<leaf.length;i++)
+                                                        {
+                                                            var temp={name:leaf[i].name};
+                                                            data.push(temp);
+                                                        }
+                                                        console.log(JSON.stringify(data));
+                                                        $.ajax({
+                                                            type: "post",
+                                                            url: "/layerup",
+                                                            data: {val: JSON.stringify(data), opt: selOp},
+                                                            dataType: "json",
+                                                            success: function (data) {
+                                                                data=data.data;
+                                                                function visit(e){
+                                                                    if(e.children.length===0){
+                                                                        for (var i = 0; i < data.length; i++) {
+                                                                            if (e.name == data[i].name) {
+                                                                                e.children = [];
+                                                                                e.children.push(data[i].children[0]);//可能出错
+                                                                                e.children.push(data[i].children[1]);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                function preOrder(e){
+                                                                    console.log("遍历 "+e.name);
+                                                                    if(!(e.children===undefined)) {
+                                                                        for (var i = 0; i < e.children.length; i++) {
+                                                                            preOrder(e.children[i]);
+                                                                        }
+                                                                        visit(e);
+                                                                    }
+                                                                }
+
+
+                                                                console.log(JSON.stringify(data));
+                                                                preOrder(nodes);
+                                                                var node1=JSON.parse(JSON.stringify(nodes));
+                                                                var history2=JSON.parse(JSON.stringify(nodes));
+                                                                index++;
+                                                                history.push(history2);
+                                                                DrawGrap(node1);
+                                                            }
+                                                        });
                                                     });
                                                     $('#down').click(function () {
-                                                        if(ownerLayerNumbe<=1)
-                                                        {
-
-                                                        }
-                                                        else
-                                                        {
-
-                                                        }
+                                                        index--;
+                                                        if(index<0)
+                                                            index=0;
+                                                        nodes=JSON.parse(JSON.stringify(history[index]));
+                                                        if(index>0)
+                                                            history.pop();
+                                                        node1=JSON.parse(JSON.stringify(nodes));
+                                                        DrawGrap(node1);
                                                     });
 
                                                 }
                                             })
                                         }
                                     })
+                                }
+                                else if(selOp=="EnterpriseAtlas") {
+
+                                    $('#up').css('display','none');
+                                    $('#down').css('display','none');
+                                    $("#ComNameGraph").html(data[i].CORP_NAME+"企业图谱");
+                                    hideAll();
+                                    $("#main-grap").css('display','table');
+                                    var name=data[i].CORP_NAME;
+                                    nodes.name=name;
+                                    $.ajax({
+                                        type: "post",
+                                        url: "/owner",
+                                        data: {val: name, opt: selOp},
+                                        dataType: "json",
+                                        success: function (data) {
+                                            data=data.data;
+                                            var pointer=nodes;
+                                            pointer.children=[];
+                                            var owner={name:'股东'};
+                                            pointer.children.push(owner);
+                                            pointer=pointer.children[0];
+                                            pointer.children=[];
+                                            pointer=pointer.children;
+                                            if(data.length==0)
+                                            {var temp={name:"无记录"};pointer.push(temp);}
+                                            for(var i=0;i<data.length;i++)
+                                            {
+                                                var temp={name:data[i].STOCK_NAME,children:[]};
+                                                pointer.push(temp);
+                                            }
+                                            $.ajax({
+                                                type: "post",
+                                                url: "/investment",
+                                                data: {val: name, opt: selOp},
+                                                dataType: "json",
+                                                success: function (data) {
+                                                    data=data.data;
+                                                    var pointer=nodes;
+                                                    var investment={name:"对外投资"};
+                                                    pointer.children.push(investment);
+                                                    pointer=pointer.children[1];
+                                                    pointer.children=[];
+                                                    pointer=pointer.children;
+                                                    for(var i=0;i<data.length;i++)
+                                                    {
+                                                        var temp={name:data[i].corp_name}
+                                                        temp.children=[];
+                                                        pointer.push(temp);
+                                                    }
+                                                    ownerLayerNumbe=1;
+                                                    var node1=JSON.parse(JSON.stringify(nodes));
+                                                    $.ajax({
+                                                        type: "post",
+                                                        url: "/EnterpriseAtlas",
+                                                        data: {val: name, opt: selOp},
+                                                        dataType: "json",
+                                                        success:function(data){
+                                                            data=data.data;
+                                                            for(var i=0;i<data.children.length;i++) {
+                                                                nodes.children.push(data.children[i]);
+                                                            }
+                                                            node1=JSON.parse(JSON.stringify(nodes));
+                                                            DrawGrap(node1);
+                                                        }
+
+                                                    })
+
+                                                }
+                                            })
+                                        }
+                                    })
+
                                 }
 
                             }
