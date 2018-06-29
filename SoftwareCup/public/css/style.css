@@ -1148,7 +1148,7 @@ JavaScript Disabled
 #main-welcome{
   height: 100%;
   width: 100%;
-  display: none;
+  display: table;
   position:absolute;
 }
 /****************/
@@ -1157,7 +1157,7 @@ JavaScript Disabled
   position:absolute;
 }
 #main-grap{
-  display: table;
+  display: none;
   position:absolute;
 }
 .Owner{
@@ -1181,6 +1181,7 @@ JavaScript Disabled
   width: 798px;
 }
 .GrapContent {
+  line-height: 100px;
   width:600px;
   height:100px;
   border-style: solid;
@@ -1192,6 +1193,7 @@ JavaScript Disabled
 .GrapContent-big {
   width:700px;
   height:120px;
+  line-height: 120px;
   border-style: solid;
   border-color: black;
   border-width: 1px;
