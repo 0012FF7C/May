@@ -5,8 +5,8 @@ var conn = mysql.createConnection({
     // host:'localhost',
     user: 'root',
     // password: 'root',
-    password:'gj849405443',
-    database: 'softwarecup',
+    password:'liyunhao',
+    database: 'softwarecup_test',
     port: 3306
     // port:3306
 });
