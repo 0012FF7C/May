@@ -1,0 +1,13 @@
+import java.net.*;
+import java.io.*;
+import java.util.*;
+public class Printer extends Thread{
+	ArrayList shortestPaths;
+	Printer(ArrayList shortestPaths){
+		this.shortestPaths=shortestPaths;
+	}
+	//最短路径中记录的是port 需要将Port解析为节点的名称
+	public void run() {//睡眠30秒后输出最短路径数组中的内容
+		
+	}
+}

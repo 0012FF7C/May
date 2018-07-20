@@ -1,0 +1,18 @@
+package Node.Data;
+import java.net.*;
+import java.io.*;
+import java.util.*;
+
+import ThreadLayer.Printer;
+public class Neibour {
+	int port;
+	String Path;
+	String Name;
+	int cost;
+	Printer printer;
+	public Neibour(String name, int cost,int  port) {
+		this.Name=name;
+		this.cost=cost;
+		this.port=port;
+	}
+}

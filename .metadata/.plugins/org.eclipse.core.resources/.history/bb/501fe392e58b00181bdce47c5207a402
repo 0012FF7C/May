@@ -1,0 +1,25 @@
+import java.net.*;
+import java.io.*;
+import java.util.*;
+public class PacketHandler {
+	public static DatagramPacket CreateMessage(String kind, String Messege,int port) throws UnknownHostException{
+		String data = kind+" ";
+		data += Messege;
+		byte[] b = data.getBytes();
+		int a = b.length;
+		String c = Integer.toString(a)+" "+data;
+		b = c.getBytes();
+		
+		InetAddress ia = InetAddress.getByName("127.0.0.1");
+		DatagramPacket ans = new DatagramPacket(b,b.length,ia,port);
+		
+		return ans;
+	}
+	public static 
+	public static void main(String[] args) throws UnknownHostException {//创建packet的例子。
+		
+		DatagramPacket ds = CreateMessage("Online", "DotName",3000);//创建一个向3000端口发送的上线消息。
+		
+	}
+
+}
