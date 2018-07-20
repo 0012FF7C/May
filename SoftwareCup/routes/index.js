@@ -234,7 +234,9 @@ router.post('/EnterpriseAtlas', function(req, res, next) {
         sql="select corp_name,dist_NAME as name \n" +
             "from t_corp join t_m_corp_corp_dist on t_corp.ORG=t_m_corp_corp_dist.ORG AND t_corp.ID=t_m_corp_corp_dist.ID AND t_corp.SEQ_ID=t_m_corp_corp_dist.SEQ_ID \n" +
             "join t_corp_dist on t_corp_dist.ORG=t_m_corp_corp_dist.SUB_ORG AND t_corp_dist.ID=t_m_corp_corp_dist.SUB_ID AND t_corp_dist.SEQ_ID=t_m_corp_corp_dist.SUB_SEQ_ID \n" +
-            "where CORP_NAME='公司01'";
+            "where CORP_NAME='"
+        sql+=val;
+        sql+="'";
         DBTCorp.queryDB(sql,function (data) {
             var dist={name:"子公司",children:[]};
             for(var i=0;i<data.length;i++){
@@ -245,7 +247,9 @@ router.post('/EnterpriseAtlas', function(req, res, next) {
             sql="select corp_name,PERSON_NAME as name \n" +
                 "from t_corp join t_m_corp_corp_pertains on t_corp.ORG=t_m_corp_corp_pertains.ORG AND t_corp.ID=t_m_corp_corp_pertains.ID AND t_corp.SEQ_ID=t_m_corp_corp_pertains.SEQ_ID \n" +
                 "join t_corp_pertains on t_corp_pertains.ORG=t_m_corp_corp_pertains.SUB_ORG AND t_corp_pertains.ID=t_m_corp_corp_pertains.SUB_ID AND t_corp_pertains.SEQ_ID=t_m_corp_corp_pertains.SUB_SEQ_ID \n" +
-                "where CORP_NAME='公司01'\n";
+                "where CORP_NAME='"
+            sql+=val;
+            sql+="'\n";
             DBTCorp.queryDB(sql,function (data) {
                 var person={name:"高管/经理",children:[]};
                 for(var i=0;i<data.length;i++){

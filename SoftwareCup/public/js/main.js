@@ -12,8 +12,7 @@
         navigationTrigger = $('.cd-nav-trigger'),
         mainHeader = $('.cd-main-header'),
         NowDis="main-welcome",
-        ownerLayerNumbe=0,
-        nodes={};
+        ownerLayerNumbe=0;
 
 
     function subfunc() {
@@ -101,7 +100,8 @@
                                         }
                                     })
                                 }
-                                else if(selOp=="InvestmentGenealogy"&&ownerLayerNumbe==0) {
+                                else if(selOp=="InvestmentGenealogy") {
+                                    nodes={};
                                     $("#ComNameGraph").html(data[i].CORP_NAME+"投资图谱");
                                     hideAll();
                                     $("#main-grap").css('display','table');
@@ -237,7 +237,7 @@
                                     })
                                 }
                                 else if(selOp=="EnterpriseAtlas") {
-
+                                    nodes={};
                                     $('#up').css('display','none');
                                     $('#down').css('display','none');
                                     $("#ComNameGraph").html(data[i].CORP_NAME+"企业图谱");
