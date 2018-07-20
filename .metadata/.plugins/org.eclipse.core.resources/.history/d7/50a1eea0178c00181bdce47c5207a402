@@ -9,9 +9,4 @@ public class Node {
 
 	ArrayList Neibours;
 	ArrayList ShortesetPaths;
-	
-	Printer pinter;
-	Djikstra dijkstra;
-	Responser responser;
-	Heart heart;
 }
