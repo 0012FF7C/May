@@ -13,17 +13,26 @@ public class Heart extends Thread{
 		DatagramPacket Data;
 		try {
 			while(true) {
-				int cnt = 3;
+
+				synchronized(HashMap.class) {
+					for(int i=0;i<Node.Neibours.size();i++) {
+						Neibour n = (Neibour)Node.Neibours.get(i);
+						Node.ResponseNeibours.put(n.Name, 0);
+					}
+				}
+				int cnt = 5;
 				while(cnt>0) {
 					for(int i=0;i<Node.Neibours.size();i++) {
 						Neibour n = (Neibour)Node.Neibours.get(i);
-						if(cnt==3)
+						
+						if(cnt==3) {
 							Node.ResponseNeibours.put(n.Name, 0);
+						}
 						Data = Node.CreateMessage("Check", Node.name, n.port);
 						Node.Servicer.send(Data);
 						cnt--;
 					}
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				}
 				
 				Set set = Node.ResponseNeibours.keySet();
@@ -56,7 +65,7 @@ public class Heart extends Thread{
 				
 			  
 			}
-			
+			 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

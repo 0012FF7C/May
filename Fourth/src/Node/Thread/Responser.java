@@ -29,8 +29,11 @@ public class Responser extends Thread{
 				head=Node.getHead(data);
 				body=Node.getBody(data);
 				it = Node.Neibours.iterator();
+				
 				if(head.equals("Online")) {
-					Node.ResponseNeibours.put(body, 0);
+					synchronized(HashMap.class) {
+						Node.ResponseNeibours.put(body, 1);
+					}
 					System.out.println("Node Online: " + body);
 					it = Node.Configs.iterator();
 					while(it.hasNext()) {
@@ -53,19 +56,24 @@ public class Responser extends Thread{
 					continue;
 				}
 				if(head.equals("Check")) {
+					//System.out.println(data);
 					DatagramPacket  Data= Node.CreateMessage("Response", Node.name, dp.getPort());
 					Node.Servicer.send(Data);
 					continue;
 				}
 				if(head.equals("Response")) {
+					synchronized(HashMap.class) {
 					int values=(int) Node.ResponseNeibours.get(body);
 					values++;
 					Node.ResponseNeibours.put(body, values);
 					continue;
+					}
 				}
 				if(head.equals("Ack")) {
-					Node.ResponseNeibours.put(body, 0);
-					System.out.println("Node Online Ack: " + body);
+					System.out.println("Online Ack "+body);
+					synchronized(HashMap.class) {
+						Node.ResponseNeibours.put(body, 1);
+					}
 					it = Node.Configs.iterator();
 					while(it.hasNext()) {
 						Neibour n = (Neibour)it.next();
