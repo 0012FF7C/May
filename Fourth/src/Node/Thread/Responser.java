@@ -18,19 +18,26 @@ public class Responser extends Thread{
 		String			body ; 
 		String 			head ;
 		Iterator 		it;
-		
+		boolean         flg;
 		while(true) {
 			try {
 				Node.Servicer.receive(dp);
 				data=Node.getPacketContent(dp);
 				head=Node.getHead(data);
 				body=Node.getBody(data);
-				
+				it = Node.Neibours.iterator();
 				if(head.equals("Online")) {
-					it = Node.Neibours.iterator();
+					System.out.println("Node Online: " + body);
+					it = Node.Configs.iterator();
 					while(it.hasNext()) {
-						System.out.println();
+						Neibour n = (Neibour)it.next();
+						if(n.Name.equals(body) ){
+							Node.Neibours.add(n);
+							break;
+						}
 					}
+					DatagramPacket  Data= Node.CreateMessage("Ack", Node.name, dp.getPort());
+					Node.Servicer.send(Data);
 					continue;
 				}
 				if(head.equals("Offline")) {
@@ -50,6 +57,19 @@ public class Responser extends Thread{
 					int values=Node.ResponseNeibours.get(body);
 					values++;
 					Node.ResponseNeibours.put(body, values);
+					continue;
+				}
+				if(head.equals("Ack")) {
+					System.out.println("Node Online Ack: " + body);
+					
+					it = Node.Configs.iterator();
+					while(it.hasNext()) {
+						Neibour n = (Neibour)it.next();
+						if(n.Name.equals(body) ){
+							Node.Neibours.add(n);
+							break;
+						}
+					}
 					continue;
 				}
 			} catch (IOException e)   {

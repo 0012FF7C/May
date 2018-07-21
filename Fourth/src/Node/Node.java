@@ -3,6 +3,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
+import Node.Data.Neibour;
 import Node.Thread.Djikstra;
 import Node.Thread.Heart;
 import Node.Thread.Printer;
@@ -20,7 +21,7 @@ public class Node {
 	public static Responser 	responser;
 	public static Heart  		heart;
 	
-	public static String ConfigFilePath;
+	public static ArrayList Configs;
 	
 	public static int ResponseNum;
 	volatile public static HashMap<String,Integer> ResponseNeibours;
@@ -88,11 +89,36 @@ public class Node {
 				beg=end;
 				end=i;
 				if(num==index) {
-					return s.substring(beg, end);
+					if(num==0)
+						return s.substring(beg, end);
+					else
+						return s.substring(beg+1, end);
 				}
 			}
 		}
-		return null;
+		return s.substring(end+1, s.length());
+	}
+	public Node(String name , int port, ArrayList Configs) throws IOException {
+		this.name=name;
+		this.port=port;
+		this.Configs=Configs;
+		
+		pinter = new Printer();
+		dijkstra = new Djikstra();
+		responser = new Responser();
+		heart = new Heart();
+		
+		Servicer = new DatagramSocket(port);
+		
+		System.out.println("Node "+name+" Initiated");
+		Neibours = new ArrayList();
+		Node.ShortesetPaths = new ArrayList();
+		Iterator it = Configs.iterator();
+		while(it.hasNext()) {
+			Neibour n = (Neibour)it.next();
+			DatagramPacket dp = Node.CreateMessage("Online", name, n.port);
+			Servicer.send(dp);
+		}
 	}
 	public static void main(String [] args) {
 		String s = new String("fjdksah 123 5798 75634");
