@@ -27,7 +27,6 @@ public class Responser extends Thread{
 				data=Node.Others.PacketHandler.getPacketContent(dp);
 				head=Node.Others.PacketHandler.getHead(data);
 				body=Node.Others.PacketHandler.getBody(data);
-				
 				if(Node.Others.PacketHandler.getHead(data).equals("Online")) {
 					it = Neibours.iterator();
 					while(it.hasNext()) {
@@ -52,7 +51,7 @@ public class Responser extends Thread{
 					continue;
 				}
 			} catch (IOException e) {
-				
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
