@@ -1,0 +1,2 @@
+cd ..
+javac Assignment.java

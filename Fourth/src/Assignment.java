@@ -27,7 +27,8 @@ public class Assignment {
 		}
 		Node n = new Node(args[0],Integer.parseInt(args[1]),al);
 		Node.responser.start();
-
+		Node.heart.start();
+		
 	}
 
 }
