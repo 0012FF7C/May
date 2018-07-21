@@ -1,4 +1,5 @@
 cd Cmd
+start Complisher.bat
 start a.bat
 start b.bat
 start c.bat
