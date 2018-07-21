@@ -1,2 +1,3 @@
 cd ..
-javac Assignment.java
+javac  ./Assignment.java
+

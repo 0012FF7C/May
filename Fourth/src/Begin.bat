@@ -1,5 +1,5 @@
 cd Cmd
-start Complisher.bat
+javac  ./Assignment.java
 start a.bat
 start b.bat
 start c.bat

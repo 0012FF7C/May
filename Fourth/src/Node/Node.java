@@ -24,7 +24,7 @@ public class Node {
 	public static ArrayList Configs;
 	
 	public static int ResponseNum;
-	volatile public static HashMap<String,Integer> ResponseNeibours;
+	volatile public static HashMap ResponseNeibours;
 	
 	public static DatagramPacket CreateMessage(String kind, String Messege,int port) throws UnknownHostException{
 		String content = kind+" ";
@@ -114,6 +114,7 @@ public class Node {
 		Neibours = new ArrayList();
 		Node.ShortesetPaths = new ArrayList();
 		Iterator it = Configs.iterator();
+		Node.ResponseNeibours = new HashMap();
 		while(it.hasNext()) {
 			Neibour n = (Neibour)it.next();
 			DatagramPacket dp = Node.CreateMessage("Online", name, n.port);

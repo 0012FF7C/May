@@ -10,6 +10,7 @@ import Node.Data.*;
 import Node.Thread.*;
 public class Responser extends Thread{
 	
+	@SuppressWarnings("unchecked")
 	public void run() {
 		byte [] b  =new byte [1024];
 		
@@ -17,7 +18,9 @@ public class Responser extends Thread{
 		String 			data ;
 		String			body ; 
 		String 			head ;
+		@SuppressWarnings("rawtypes")
 		Iterator 		it;
+		@SuppressWarnings("unused")
 		boolean         flg;
 		while(true) {
 			try {
@@ -27,6 +30,7 @@ public class Responser extends Thread{
 				body=Node.getBody(data);
 				it = Node.Neibours.iterator();
 				if(head.equals("Online")) {
+					Node.ResponseNeibours.put(body, 0);
 					System.out.println("Node Online: " + body);
 					it = Node.Configs.iterator();
 					while(it.hasNext()) {
@@ -49,19 +53,19 @@ public class Responser extends Thread{
 					continue;
 				}
 				if(head.equals("Check")) {
-					DatagramPacket  Data= Node.CreateMessage("Response", Node.name, Node.port);
+					DatagramPacket  Data= Node.CreateMessage("Response", Node.name, dp.getPort());
 					Node.Servicer.send(Data);
 					continue;
 				}
 				if(head.equals("Response")) {
-					int values=Node.ResponseNeibours.get(body);
+					int values=(int) Node.ResponseNeibours.get(body);
 					values++;
 					Node.ResponseNeibours.put(body, values);
 					continue;
 				}
 				if(head.equals("Ack")) {
+					Node.ResponseNeibours.put(body, 0);
 					System.out.println("Node Online Ack: " + body);
-					
 					it = Node.Configs.iterator();
 					while(it.hasNext()) {
 						Neibour n = (Neibour)it.next();

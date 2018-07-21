@@ -9,7 +9,7 @@ import Node.Data.Neibour;
 
 public class Assignment {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		File f = new File(args[2]);
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		ArrayList al = new ArrayList();
