@@ -1,14 +1,14 @@
 
+import java.util.*;
 public class test {
-	A a;
-	B b;
-	test(){
-		b=new B(a);
-	}
 	public static void main(String[] args) {
-		test t=new test();
-		t.b.start();
-		System.out.println(t.a.S);
+		Map map  = new HashMap();
+		String a = new String("aaaa");
+		String b = new String("aaaa");
+		map.put(a, 2);
+		map.put(b, 3);
+		System.out.println(map.get(a));
+		
 
 	}
 

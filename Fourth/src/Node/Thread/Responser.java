@@ -26,27 +26,30 @@ public class Responser extends Thread{
 				head=Node.getHead(data);
 				body=Node.getBody(data);
 				
-				if(Node.getHead(data).equals("Online")) {
+				if(head.equals("Online")) {
 					it = Node.Neibours.iterator();
 					while(it.hasNext()) {
 						System.out.println();
 					}
 					continue;
 				}
-				if(Node.getHead(data).equals("Offline")) {
+				if(head.equals("Offline")) {
 					
 					continue;
 				}
-				if(Node.getHead(data).equals("Shutdown")) {
+				if(head.equals("Shutdown")) {
 					
 					continue;
 				}
-				if(Node.getHead(data).equals("Check")) {
-					
+				if(head.equals("Check")) {
+					DatagramPacket  Data= Node.CreateMessage("Response", Node.name, Node.port);
+					Node.Servicer.send(Data);
 					continue;
 				}
-				if(Node.getHead(data).equals("Response")) {
-					
+				if(head.equals("Response")) {
+					int values=Node.ResponseNeibours.get(body);
+					values++;
+					Node.ResponseNeibours.put(body, values);
 					continue;
 				}
 			} catch (IOException e)   {

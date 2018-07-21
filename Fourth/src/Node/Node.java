@@ -21,7 +21,9 @@ public class Node {
 	public static Heart  		heart;
 	
 	public static String ConfigFilePath;
-	public static String ResponseNodes;
+	
+	public static int ResponseNum;
+	volatile public static HashMap<String,Integer> ResponseNeibours;
 	
 	public static DatagramPacket CreateMessage(String kind, String Messege,int port) throws UnknownHostException{
 		String content = kind+" ";
@@ -94,6 +96,6 @@ public class Node {
 	}
 	public static void main(String [] args) {
 		String s = new String("fjdksah 123 5798 75634");
-		System.out.println(getLen(s));
+		System.out.println(get(s,0));
 	}
 }
