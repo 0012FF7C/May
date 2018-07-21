@@ -5,10 +5,10 @@ import java.util.*;
 
 import Node.Thread.Printer;
 public class Neibour {
-	int port;
-	String Path;
-	String Name;
-	int cost;
+	public int port;
+	public String Path;
+	public String Name;
+	public int cost;
 	Printer printer;
 	public Neibour(String name, int cost,int  port) {
 		this.Name=name;
