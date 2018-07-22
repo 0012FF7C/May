@@ -26,8 +26,11 @@ public class Assignment {
 			al.add(n);
 		}
 		Node n = new Node(args[0],Integer.parseInt(args[1]),al);
+		
 		Node.responser.start();
 		Node.heart.start();
+		Thread.sleep(5000);
+		Node.dijkstra.start();
 		
 	}
 

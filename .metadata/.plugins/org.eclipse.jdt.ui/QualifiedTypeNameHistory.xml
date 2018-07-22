@@ -6,4 +6,6 @@
 <fullyQualifiedTypeName name="Node.Thread.Printer"/>
 <fullyQualifiedTypeName name="Node.Others.PacketHandler"/>
 <fullyQualifiedTypeName name="Node.Data.Neibour"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="Node.Node"/>
 </qualifiedTypeNameHistroy>

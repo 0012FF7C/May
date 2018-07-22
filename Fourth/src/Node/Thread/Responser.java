@@ -51,22 +51,41 @@ public class Responser extends Thread{
 					
 					continue;
 				}
-				if(head.equals("Shutdown")) {
+				if(head.equals("ShutDown")) {
+					String NodeName = Node.get(body,0);
+					System.out.println("Node Shut down :"+NodeName);
+					DatagramPacket d;
+					String s = NodeName+" "+Integer.toString(Integer.parseInt(Node.get(body,1))-1);
+					it = Node.ShortesetPaths.iterator();
+					boolean flg1 = false;
+					while(it.hasNext()) {
+						Neibour temp = (Neibour)it.next();
+						if(temp.Name.equals(NodeName)) {
+							it.remove();
+							flg1=true;
+						}
+					}
+					if(flg1) {
+						it = Node.Neibours.iterator();
+						while(it.hasNext()) {
+							Neibour temp = (Neibour)it.next();
+							d = Node.CreateMessage("ShutDown", s, temp.port);
+						}
+					}
 					
 					continue;
 				}
 				if(head.equals("Check")) {
-					//System.out.println(data);
 					DatagramPacket  Data= Node.CreateMessage("Response", Node.name, dp.getPort());
 					Node.Servicer.send(Data);
 					continue;
 				}
 				if(head.equals("Response")) {
 					synchronized(HashMap.class) {
-					int values=(int) Node.ResponseNeibours.get(body);
-					values++;
-					Node.ResponseNeibours.put(body, values);
-					continue;
+						int values=(int) Node.ResponseNeibours.get(body);
+						values++;
+						Node.ResponseNeibours.put(body, values);
+						continue;
 					}
 				}
 				if(head.equals("Ack")) {
@@ -83,6 +102,74 @@ public class Responser extends Thread{
 						}
 					}
 					continue;
+				}
+				if(head.equals("Request")) {
+					String nextNode = body.substring(1, 2);//例如"BBCA 200"
+					int cost;
+					if(nextNode.equals(Node.name)) {//到达目的地开始返回数据
+						
+						nextNode=body.substring(2, 3); //拿出C
+						cost = Integer.parseInt(Node.get(body, 1));//得到cost
+						String route = Node.get(body, 0).substring(2, Node.get(body, 0).length());
+						String Path = Node.get(body, 0);
+						Path=Path.substring(1, Path.length());//"BCA"
+						String temp = new String();
+						for(int i=0;i<Path.length();i++) {
+							temp=Path.charAt(i)+temp;
+						}//倒转
+						Path=temp;
+						ArrayList al = new ArrayList();
+						it = Node.Neibours.iterator();
+						while(it.hasNext()) {//深复制
+							Neibour n = (Neibour) it.next();
+							Neibour n1 = new Neibour(n.Name,n.cost,n.port);
+							if(!Path.substring(0,1).equals(n.Name))
+								al.add(n1);
+							
+						}
+						it = al.iterator();//cost赋值完成 Path赋值完成
+						while(it.hasNext()) {
+							Neibour n = (Neibour) it.next();
+							n.cost+=cost;
+							n.Path=Path;
+							n.Path+=n.Name;
+							
+						}
+						String DATA = route+" "+Node.ArrayListToString(al);
+						DatagramPacket d = Node.CreateMessage("NodeNeibour", DATA, Node.getPort(nextNode));
+						Node.Servicer.send(d);
+						
+					}
+					else {//否则转发例如“BCDDCBA 200” 收到的时候字符串第一位是本节点的名称。
+						cost = Integer.parseInt(Node.get(body, 1));
+						String Transmit = Node.get(body, 0);
+						cost += Node.getCostTo(nextNode);
+						Transmit+=" ";
+						Transmit+=Integer.toString(cost);
+						DatagramPacket d = Node.CreateMessage("Request",Transmit,Node.getPort(nextNode));
+						Node.Servicer.send(d);
+						
+					}
+					
+				}
+				if(head.equals("NodeNeibour")) {
+					if(Node.get(body, 0).equals(Node.name)) {
+						System.out.println(Node.Reach);
+						Iterator it2 = Node.Reach.iterator();
+						ArrayList al = Node.StringToArratlist(body);
+						it = al.iterator();
+						boolean flg1;
+						while(it.hasNext()) {
+							Neibour n = (Neibour)it.next();
+							while(it2.hasNext()) {
+								Neibour n2 = (Neibour)it2.next();
+								if(n.Name.equals(n2.Name)&&n2.cost>n.cost) {
+										n2=n;
+								}
+							}
+						}
+						System.out.println(Node.Reach);
+					}
 				}
 			} catch (IOException e)   {
 				

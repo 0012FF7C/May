@@ -29,10 +29,11 @@ public class Heart extends Thread{
 							Node.ResponseNeibours.put(n.Name, 0);
 						}
 						Data = Node.CreateMessage("Check", Node.name, n.port);
+						
 						Node.Servicer.send(Data);
 						cnt--;
 					}
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				}
 				
 				Set set = Node.ResponseNeibours.keySet();
@@ -55,9 +56,12 @@ public class Heart extends Thread{
 								}
 							}
 							it.remove();
-						}else {
-							Data = Node.CreateMessage("ShutDown", str+" 6", n1.port);
-							Node.Servicer.send(Data);
+							
+							for(int j=0;j< Node.Neibours.size();j++) {
+								Neibour temp = (Neibour)Node.Neibours.get(j);
+								Data = Node.CreateMessage("ShutDown", str+" 6", temp.port);
+								Node.Servicer.send(Data);
+							}
 						}
 					}
 				
