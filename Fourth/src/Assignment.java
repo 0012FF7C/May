@@ -32,6 +32,7 @@ public class Assignment {
 		Node.heart.start();
 		Thread.sleep(5000);
 		Node.dijkstra.start();
+		Node.pinter.start();
 		
 	}
 
