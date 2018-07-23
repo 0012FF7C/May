@@ -22,7 +22,7 @@ public class Node {
 	public static int ResponseNum;
 	public static ArrayList Reach;
 	volatile public static HashMap ResponseNeibours;
-	public static boolean used;
+	public static boolean DjiSignal;
 	
 	public static DatagramPacket CreateMessage(String kind, String Messege,int port) throws UnknownHostException{
 		String content = kind+" ";
@@ -109,7 +109,7 @@ public class Node {
 	}
 
 	public static Neibour StringToNeibour(String s) {
-		Neibour n = new Neibour(get(s,0),Integer.parseInt(get(s,2)),Integer.parseInt(get(s,3)));
+		Neibour n = new Neibour(get(s,0),Integer.parseInt(get(s,3)),Integer.parseInt(get(s,2)));
 		n.Path=get(s,1);
 		return n;
 	}
@@ -193,18 +193,21 @@ public class Node {
 		}
 		return 0;
 	}
-	public static void main(String [] args) {
-		ArrayList al = new ArrayList();
-		Neibour n1 = new Neibour("A",5,3000);
-		n1.Path=new String("EDFFDE");
-		Neibour n2 = new Neibour("B",2,2000);
-		al.add(n1);
-		al.add(n2);
-		String str = Node.ArrayListToString(al);
-		System.out.println(str);
-
-		al =StringToArratlist(str) ;
-		System.out.println(al);
+	public static void main(String [] args) throws IOException {
+//		ArrayList al = new ArrayList();
+//		Neibour n1 = new Neibour("A",5,3000);
+//		n1.Path=new String("EDFFDE");
+//		Neibour n2 = new Neibour("B",2,2000);
+//		al.add(n1);
+//		al.add(n2);
+//		String str = Node.ArrayListToString(al);
+//		System.out.println(str);
+//
+//		al =StringToArratlist(str) ;
+//		System.out.println(al);
 		
+		DatagramSocket d = new DatagramSocket(3000);
+		DatagramPacket dp = Node.CreateMessage("Request", "ABCDEEDCBA 100", 2000);
+		d.send(dp);
 	}
 }

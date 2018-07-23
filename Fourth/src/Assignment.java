@@ -25,6 +25,7 @@ public class Assignment {
 			Neibour n = new Neibour(Name,cost,port);
 			al.add(n);
 		}
+		
 		Node n = new Node(args[0],Integer.parseInt(args[1]),al);
 		
 		Node.responser.start();
