@@ -22,9 +22,9 @@ public class Node {
 	public static ArrayList Reach;
 	public static boolean RunningSteady;
 	
-	public static DatagramPacket CreateMessage(String kind, String Messege,int port) throws UnknownHostException{
-		String content = kind+" ";
-		content += Messege;
+	public static DatagramPacket CreateMessage(String Head, String Body,int port) throws UnknownHostException{
+		String content = Head+" ";
+		content += Body;
 		int len = content.length();
 		String data = Integer.toString(len)+" "+content;
 		
