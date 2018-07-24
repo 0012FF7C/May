@@ -206,6 +206,15 @@ public class Responser extends Thread{
 						//System.out.println(Node.name+" NodeNeibour Transmitted "+DATA);
 					}
 				}
+				if(head.equals("CheckCmd")) {
+					String retMessage = Node.ArrayListToString(Node.ShortesetPaths);
+					DatagramPacket  Data= Node.CreateMessage("ReCheckCmd", retMessage, dp.getPort());
+					//System.out.println("wo shoudaoi le cmd");
+					Node.Servicer.send(Data);
+					continue;
+				}
+				
+				
 			} catch (IOException e)   {
 				
 				e.printStackTrace();
