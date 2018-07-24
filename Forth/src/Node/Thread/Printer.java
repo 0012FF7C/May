@@ -10,16 +10,18 @@ public class Printer extends Thread{
 	public void run() {//睡眠30秒后输出最短路径数组中的内容
 		//注意调用ArrayList的类锁
 		while(true) {
-			
-			for(int i = 0 ; i < Node.ShortestPaths.size() ; i++) {
-				StaticNode N  = ((StaticNode)Node.ShortestPaths.get(i));
-				System.out.print("least-cost path to node ");
-				System.out.print(  N.Name + ":"  );
-				System.out.print(  N.Path + " "  );
-				System.out.print("and the cost is ");
-				System.out.println(  N.cost );
+			synchronized(HashMap.class) {
+				for(int i = 0 ; i < Node.ShortestPaths.size() ; i++) {
+					StaticNode N  = ((StaticNode)Node.ShortestPaths.get(i));
+					System.out.print("least-cost path to node ");
+					System.out.print(  N.Name + ":"  );
+					System.out.print(  N.Path + " "  );
+					System.out.print("and the cost is ");
+					System.out.println(  N.cost );
+				}
+				System.out.println("****************************************************************");
 			}
-			System.out.println("****************************************************************");
+			
 			try {
 				Thread.sleep(20000);
 			} catch (InterruptedException e) {

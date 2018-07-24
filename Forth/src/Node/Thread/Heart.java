@@ -7,6 +7,7 @@ import Node.*;
 import Node.Data.*;
 public class Heart extends Thread{
 	volatile public static HashMap ResponseStaticNodes;
+	//用于记录收的邻居的心跳包的个数
 	
 	@SuppressWarnings("unchecked")
 	public void run() {
