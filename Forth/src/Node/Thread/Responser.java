@@ -79,6 +79,7 @@ public class Responser extends Thread{
 						while(it.hasNext()) {
 							StaticNode temp = (StaticNode)it.next();
 							d = Node.CreateMessage("ShutDown", NodeName, temp.port);
+							Node.Servicer.send(d);
 						}
 					}
 					
