@@ -30,9 +30,10 @@ public class Assignment {
 		
 		Node.responser.start();
 		Node.heart.start();
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		Node.RunningSteady=true;
 		Node.dijkstra.start();
+		Thread.sleep(6000);
 		Node.pinter.start();
 		
 	}

@@ -10,7 +10,8 @@ public class Printer extends Thread{
 	public void run() {//睡眠30秒后输出最短路径数组中的内容
 		//注意调用ArrayList的类锁
 		while(true) {
-			
+			System.out.println("Printer : ");
+			System.out.println("****************************************************************");
 			for(int i = 0 ; i < Node.ShortestPaths.size() ; i++) {
 				StaticNode N  = ((StaticNode)Node.ShortestPaths.get(i));
 				System.out.print("least-cost path to node ");

@@ -12,7 +12,7 @@ public class Djikstra extends Thread{
 		int MinCost;
 		StaticNode temp = null;
 		Node.Reach=new ArrayList();
-		Iterator it = Node.StaticNodes.iterator();
+		Iterator it = Node.Neibours.iterator();
 		while(it.hasNext()) {//…Ó∂»∏¥÷∆
 			StaticNode n = (StaticNode)it.next();
 			StaticNode n1 = new StaticNode(n.Name,n.cost,n.port);
@@ -40,15 +40,7 @@ public class Djikstra extends Thread{
 					}
 				}
 				if(temp==null) {
-					System.out.println("Djikstra: finished Now Outputing");
-					System.out.println("");
-					System.out.println("*********************************");
-					System.out.println("Djikstra: Shortest Paths");
-					for(int i=0;i<Node.ShortestPaths.size();i++) {
-						StaticNode n = (StaticNode)Node.ShortestPaths.get(i);
-						System.out.println(Node.name+" to "+n.Name+" "+n.Path+" \t"+n.cost);
-					}
-					System.out.println("*********************************");
+					System.out.println("Djikstra: finished. Printer will print it ");
 					break;
 				}
 				Node.ShortestPaths.add(temp);
