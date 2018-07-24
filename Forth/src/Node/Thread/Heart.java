@@ -6,8 +6,10 @@ import java.util.*;
 import Node.*;
 import Node.Data.*;
 public class Heart extends Thread{
-	volatile public static HashMap ResponseStaticNodes;
-	//用于记录收的邻居的心跳包的个数
+
+
+	volatile public static HashMap ResponseNeibours;
+
 	
 	@SuppressWarnings("unchecked")
 	public void run() {
@@ -17,18 +19,18 @@ public class Heart extends Thread{
 			while(true) {
 
 				synchronized(HashMap.class) {
-					for(int i=0;i<Node.StaticNodes.size();i++) {
-						StaticNode n = (StaticNode)Node.StaticNodes.get(i);
-						ResponseStaticNodes.put(n.Name, 0);
+					for(int i=0;i<Node.Neibours.size();i++) {
+						StaticNode n = (StaticNode)Node.Neibours.get(i);
+						ResponseNeibours.put(n.Name, 0);
 					}
 				}
 				int cnt = 5;
 				while(cnt>0) {
-					for(int i=0;i<Node.StaticNodes.size();i++) {
-						StaticNode n = (StaticNode)Node.StaticNodes.get(i);
+					for(int i=0;i<Node.Neibours.size();i++) {
+						StaticNode n = (StaticNode)Node.Neibours.get(i);
 						
 						if(cnt==3) {
-							ResponseStaticNodes.put(n.Name, 0);
+							ResponseNeibours.put(n.Name, 0);
 						}
 						Data = Node.CreateMessage("Check", Node.name, n.port);
 						
@@ -38,18 +40,18 @@ public class Heart extends Thread{
 					Thread.sleep(2000);
 				}
 				
-				Set set = ResponseStaticNodes.keySet();
+				Set set = ResponseNeibours.keySet();
 				Iterator it = set.iterator();
-				Iterator it2=Node.StaticNodes.iterator();
+				Iterator it2=Node.Neibours.iterator();
 				while(it.hasNext()) {
 					String str = (String)it.next();
-					int count = (int)ResponseStaticNodes.get(str);
+					int count = (int)ResponseNeibours.get(str);
 	
 	
-					for(int i = 0;i < Node.StaticNodes.size();i++) {
-						StaticNode n1 =(StaticNode)Node.StaticNodes.get(i);
+					for(int i = 0;i < Node.Neibours.size();i++) {
+						StaticNode n1 =(StaticNode)Node.Neibours.get(i);
 						if((n1.Name.equals(str))&&count==0) {
-							System.out.println("Node is dead "+str);
+							System.out.println("Checker : Node is dead "+str);
 							while(it2.hasNext()) {
 								StaticNode n2 = (StaticNode)it2.next();
 								if(n2.Name.equals(str)) {
@@ -59,11 +61,8 @@ public class Heart extends Thread{
 							}
 							it.remove();
 							
-							for(int j=0;j< Node.StaticNodes.size();j++) {
-								StaticNode temp = (StaticNode)Node.StaticNodes.get(j);
-								Data = Node.CreateMessage("ShutDown", str+" 6", temp.port);
-								Node.Servicer.send(Data);
-							}
+							Data = Node.CreateMessage("ShutDown", str, Node.port);
+							Node.Servicer.send(Data);
 						}
 					}
 				

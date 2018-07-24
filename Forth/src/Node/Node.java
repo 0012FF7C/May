@@ -12,7 +12,7 @@ public class Node {
 	public static DatagramSocket 	Servicer;
 	public static String			name;
 	public static int           	port;
-	public static ArrayList StaticNodes;
+	public static ArrayList Neibours;
 	public static ArrayList ShortestPaths;
 	public static Printer 	pinter;
 	public static Djikstra	dijkstra;
@@ -126,10 +126,10 @@ public class Node {
 		Servicer = new DatagramSocket(port);
 		
 		System.out.println("Node "+name+" Initiated");
-		StaticNodes = new ArrayList();
+		Neibours = new ArrayList();
 		Node.ShortestPaths = new ArrayList();
 		Iterator it = Configs.iterator();
-		Heart.ResponseStaticNodes = new HashMap();
+		Heart.ResponseNeibours = new HashMap();
 		while(it.hasNext()) {
 			StaticNode n = (StaticNode)it.next();
 			DatagramPacket dp = Node.CreateMessage("Online", name, n.port);
@@ -145,8 +145,8 @@ public class Node {
 		return false;
 	}
 	public static int getPort(String str) {
-		for(int i=0;i<StaticNodes.size();i++) {
-			StaticNode n = (StaticNode)StaticNodes.get(i);
+		for(int i=0;i<Neibours.size();i++) {
+			StaticNode n = (StaticNode)Neibours.get(i);
 			if(n.Name.equals(str)) {
 				return n.port;
 			}
@@ -183,7 +183,7 @@ public class Node {
 		return al;
 	}
 	public static int getCostTo(String name) {
-		Iterator it = StaticNodes.iterator();
+		Iterator it = Neibours.iterator();
 		while(it.hasNext()) {
 			StaticNode n = (StaticNode)it.next();
 			if(n.Name.equals(name)) {
@@ -191,6 +191,15 @@ public class Node {
 			}
 		}
 		return 0;
+	}
+	public static void PrintArr(ArrayList al ) {
+		Iterator it = al.iterator();
+		System.out.println("_____________________________________");
+		while(it.hasNext()) {
+			StaticNode n = (StaticNode)it.next();
+			System.out.println(n.Name+" "+n.Path+" "+n.cost);
+		}
+		System.out.println("_____________________________________");
 	}
 	public static void main(String [] args) throws IOException {
 //		ArrayList al = new ArrayList();

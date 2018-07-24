@@ -10,6 +10,7 @@ public class Printer extends Thread{
 	public void run() {//睡眠30秒后输出最短路径数组中的内容
 		//注意调用ArrayList的类锁
 		while(true) {
+
 			synchronized(HashMap.class) {
 				for(int i = 0 ; i < Node.ShortestPaths.size() ; i++) {
 					StaticNode N  = ((StaticNode)Node.ShortestPaths.get(i));
@@ -20,6 +21,7 @@ public class Printer extends Thread{
 					System.out.println(  N.cost );
 				}
 				System.out.println("****************************************************************");
+
 			}
 			
 			try {

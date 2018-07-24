@@ -28,18 +28,18 @@ public class Responser extends Thread{
 				data=Node.getPacketContent(dp);
 				head=Node.getHead(data);
 				body=Node.getBody(data);
-				it = Node.StaticNodes.iterator();
+				it = Node.Neibours.iterator();
 				
 				if(head.equals("Online")) {
 					synchronized(HashMap.class) {
-						Heart.ResponseStaticNodes.put(body, 1);
+						Heart.ResponseNeibours.put(body, 1);
 					}
 					System.out.println("Main : Node Online: " + body);
 					it = Node.Configs.iterator();
 					while(it.hasNext()) {
 						StaticNode n = (StaticNode)it.next();
 						if(n.Name.equals(body) ){
-							Node.StaticNodes.add(n);
+							Node.Neibours.add(n);
 							break;
 						}
 					}
@@ -52,11 +52,18 @@ public class Responser extends Thread{
 					continue;
 				}
 				if(head.equals("ShutDown")) {
-					String NodeName = Node.get(body,0);
+					String NodeName = body;
 					DatagramPacket d;
-					String s = NodeName+" "+Integer.toString(Integer.parseInt(Node.get(body,1))-1);
-					it = Node.ShortestPaths.iterator();
+					it = Node.Neibours.iterator();
 					boolean flg1 = false;
+					while(it.hasNext()) {
+						StaticNode temp = (StaticNode)it.next();
+						if(temp.Name.equals(NodeName)) {
+							it.remove();
+							flg1=true;
+						}
+					}
+					it = Node.ShortestPaths.iterator();
 					while(it.hasNext()) {
 						StaticNode temp = (StaticNode)it.next();
 						if(temp.Name.equals(NodeName)) {
@@ -68,10 +75,10 @@ public class Responser extends Thread{
 						Djikstra d1 = new  Djikstra();
 						System.out.println("Main : Node Shut down =="+NodeName+"== Dijkstra restart");
 						d1.start();
-						it = Node.StaticNodes.iterator();
+						it = Node.Neibours.iterator();
 						while(it.hasNext()) {
 							StaticNode temp = (StaticNode)it.next();
-							d = Node.CreateMessage("ShutDown", s, temp.port);
+							d = Node.CreateMessage("ShutDown", NodeName, temp.port);
 						}
 					}
 					
@@ -84,16 +91,16 @@ public class Responser extends Thread{
 				}
 				if(head.equals("Response")) {
 					synchronized(HashMap.class) {
-						int values=(int) Heart.ResponseStaticNodes.get(body);
+						int values=(int) Heart.ResponseNeibours.get(body);
 						values++;
-						Heart.ResponseStaticNodes.put(body, values);
+						Heart.ResponseNeibours.put(body, values);
 						continue;
 					}
 				}
 				if(head.equals("Ack")) {
 					System.out.println("Main : Online Ack "+body);
 					synchronized(HashMap.class) {
-						Heart.ResponseStaticNodes.put(body, 1);
+						Heart.ResponseNeibours.put(body, 1);
 					}
 					it = Node.Configs.iterator();
 					while(it.hasNext()) {
@@ -103,7 +110,7 @@ public class Responser extends Thread{
 								Djikstra d1 = new Djikstra();
 								d1.start();
 							}
-							Node.StaticNodes.add(n);
+							Node.Neibours.add(n);
 							break;
 						}
 					}
@@ -124,7 +131,7 @@ public class Responser extends Thread{
 						}//倒转
 						Path=temp;
 						ArrayList al = new ArrayList();
-						it = Node.StaticNodes.iterator();
+						it = Node.Neibours.iterator();
 						while(it.hasNext()) {//深复制
 							StaticNode n = (StaticNode) it.next();
 							StaticNode n1 = new StaticNode(n.Name,n.cost,n.port);
@@ -179,13 +186,16 @@ public class Responser extends Thread{
 								}
 							}
 						}
+						if(al.size()==0)
+							System.out.println("Reach : Lost Occured");
 						synchronized(Node.Reach) {//更新Reach 使用程序锁
-							flg1=true;
+							
 							for(int i=0;i<al.size();i++) {
+								flg1=true;
 								StaticNode NewNode = (StaticNode)al.get(i);
 								for(int j=0;j<Node.Reach.size();j++) {
 									StaticNode OldOne = (StaticNode)Node.Reach.get(j);
-									if(NewNode.Name.equals(OldOne.Name)&&NewNode.cost<OldOne.cost) {
+									if(NewNode.Name.equals(OldOne.Name)&&NewNode.cost<=OldOne.cost) {
 										OldOne.cost=NewNode.cost;
 										OldOne.Path=NewNode.Path;
 										flg1=false;
