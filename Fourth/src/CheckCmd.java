@@ -78,10 +78,12 @@ public class CheckCmd {
 				dp1 = Node.CreateMessage("CheckCmd", " ",2004);
 			}else if(cmd.equals("F")) {
 				dp1 = Node.CreateMessage("CheckCmd", " ",2005);
+			}else {
+				
+				continue;
 			}
 			
-//			
-//			
+		
 //			PortA=2000
 //					PortB=2001
 //					PortC=2002
