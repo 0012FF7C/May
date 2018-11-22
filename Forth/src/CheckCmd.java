@@ -7,10 +7,7 @@ import Node.Data.*;
 
 public class CheckCmd {
 	public static DatagramSocket 	Servicer1;
-	
-//	public CheckCmd() throws SocketException {
-//		
-//	}
+
 	public static void main(String[] args) throws IOException  {
 
 		Servicer1 = new DatagramSocket(3000);

@@ -37,7 +37,7 @@ public class Heart extends Thread{
 						Node.Servicer.send(Data);
 						cnt--;
 					}
-					Thread.sleep(2000);
+					Thread.sleep(250);
 				}
 				
 				Set set = ResponseNeibours.keySet();
@@ -46,7 +46,6 @@ public class Heart extends Thread{
 				while(it.hasNext()) {
 					String str = (String)it.next();
 					int count = (int)ResponseNeibours.get(str);
-	
 	
 					for(int i = 0;i < Node.Neibours.size();i++) {
 						StaticNode n1 =(StaticNode)Node.Neibours.get(i);
